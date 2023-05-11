@@ -1,0 +1,512 @@
+﻿
+@{
+    ViewBag.Title = "Đăng nhập";
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://kit.fontawesome.com/b0bf115489.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+    
+    <title>Đăng nhập</title>
+</head>
+
+<body>
+    <style>
+        body {
+            background: url("../../Asset/Images/back.jpg");
+        }
+
+        #wrapper {
+            height: 550px;
+            width: 40%;
+            display: flex;
+            flex-direction: column;
+            background: white;
+            border-radius: 10px;
+            margin-left: 30%;
+            position: relative;
+        }
+
+        .title {
+            padding: 10px;
+            text-align: center;
+            margin-top: 10px;
+            font-size: 30px;
+        }
+
+        #fe2 {
+            background: rgb(192,250,255);
+            padding: 10px;
+            width: 82%;
+            border-radius: 15px;
+            margin-left: 7%;
+        }
+        .loader {
+            width: 100%;
+            height: 100%;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 100000000000;
+            display: block;
+            overflow: hidden;
+        }
+
+        .icon22 {
+            font-size: 80px;
+            color: #fff;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            margin-top: -40px;
+            margin-left: -40px;
+        }
+
+        .xoay {
+            animation: xoay 1.5s linear infinite;
+            -moz-animation: xoay 1.5s linear infinite;
+            -ms-animation: xoay 1.5s linear infinite;
+            -o-animation: xoay 1.5s linear infinite;
+            -webkit-animation: xoay 1.5s linear infinite;
+        }
+
+        @@-webkit-keyframes xoay {
+            from {
+                -ms-transform: rotate(0deg);
+                -moz-transform: rotate(0deg);
+                -o-transform: rotate(0deg);
+                -webkit-transform: rotate(0deg);
+                transform: rotate(0deg);
+            }
+
+            to {
+                -ms-transform: rotate(360deg);
+                -moz-transform: rotate(360deg);
+                -o-transform: rotate(360deg);
+                -webkit-transform: rotate(360deg);
+                transform: rotate(360deg);
+            }
+        }
+        .list {
+            color: rgb(26, 182, 196);
+        }
+
+        #form-login {
+            margin-top: 20px;
+            padding: 10px;
+        }
+
+        #username {
+            padding: 5px;
+            margin: 10px 30px 0px 20px;
+            display: flex;
+            position: relative;
+            border-bottom: 2px solid rgb(61, 132, 199);
+        }
+
+        #password {
+            padding: 5px;
+            margin: 40px 30px 0px 20px;
+            display: flex;
+            position: relative;
+            border-bottom: 2px solid rgb(61, 132, 199);
+        }
+
+        .a-img {
+            position: absolute;
+            top: 5px;
+        }
+
+        .b-img {
+            position: absolute;
+            top: 5px;
+        }
+
+        #form-login {
+            margin-left: 10px;
+        }
+
+        .user {
+            margin-left: 35px;
+            border: none;
+            outline: none;
+            width: 100%;
+            font-size: 18px;
+        }
+
+        .pass {
+            margin-left: 35px;
+            border: none;
+            outline: none;
+            width: 100%;
+            font-size: 18px;
+        }
+
+        #submit {
+            position: absolute;
+            top: 440px;
+        }
+
+        #btnsm {
+            height: 55px;
+            width: 397%;
+            margin-left: 20px;
+            border-radius: 10px;
+            border: none;
+            background: linear-gradient(-90deg,rgb(0,108, 173),rgb(0,182,174));
+            color: white;
+            font-weight: 500;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+            #btnsm:hover {
+                background: linear-gradient(90deg,rgb(0,108, 173),rgb(0,182,174));
+            }
+
+        #tdn {
+            position: absolute;
+            left: 45px;
+            font-size: 21px;
+            display: none;
+            color: black;
+        }
+
+        #mk {
+            position: absolute;
+            left: 45px;
+            font-size: 21px;
+            display: none;
+            color: black;
+        }
+
+        #error-username {
+            margin-left: 20px;
+            color: rgb(223, 71, 71);
+        }
+
+        #error-password {
+            margin-left: 20px;
+            margin-top: 2px;
+            color: rgb(223, 71, 71);
+        }
+
+        #eye {
+            margin-left: 0px;
+        }
+
+        #invalid {
+            position: absolute;
+            background: rgba(231, 192, 192, 0.4);
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            display: none;
+        }
+
+        #f1 {
+            display: flex;
+            flex-direction: column;
+            height: 40%;
+            width: 30%;
+            background: white;
+            justify-content: center;
+            text-align: center;
+            margin-top: 15%;
+            margin-left: 35%;
+            border-radius: 15px;
+        }
+
+        #btn-close {
+            height: 50px;
+            width: 100%;
+            font-size: 20px;
+            border-radius: 10px;
+            border: none;
+            background: rgb(0,182,174);
+            color: white;
+            cursor: pointer;
+        }
+
+        #ktc {
+            margin-top: 15px;
+            font-size: 18px;
+            font-weight: 500;
+        }
+
+        #btn-close:hover {
+            background: rgb(0,108, 173);
+        }
+
+        #tt {
+            margin-top: 15px;
+        }
+
+        #tt1 {
+            font-size: 16px;
+            font-weight: 300;
+        }
+
+        #forget_pass {
+            margin-top: 120px;
+            margin-left: 40px;
+            font-size: 18px;
+        }
+
+        #aaabbb {
+            text-decoration: none;
+        }
+
+        #load {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            right: 0;
+            left: 0;
+            display: none;
+            background: rgba(77, 74, 74, 0.4);
+        }
+    </style>
+    <div id="wrapper">
+        <form id="form">
+            <div class="title">
+                <div id="t1">Chào mừng Quý khách đến với</div>
+                <div id="t2">SmartBanking</div>
+            </div>
+            <div id="fe2">
+                <ul class="list">
+                    <li>
+                        Với khách hàng đã có tài khoản
+                        <span class="inline-block snip-span">
+                            SmartBanking
+                        </span>
+                        :
+                        <br>
+                        <b>
+                            Tên đăng nhập là Số điện thoại đăng ký dịch vụ
+                        </b>
+                    </li>
+                    <li>
+                        Với khách hàng chưa có tài khoản
+                        <span class="inline-block snip-span">
+                            SmartBanking
+                        </span>
+                        :
+                        <br>
+                        <b>
+
+                        </b>
+                        Đến chi nhánh ngân hàng gần nhất để tạo tài khoản SmartBanking
+                    </li>
+                </ul>
+            </div>
+            <div id="form-login">
+                <div id="username">
+                    <input class="user" placeholder="Tên đăng nhập" maxlength="10" />
+                    <label id="tdn">Tên đăng nhập</label>
+                    <img alt="" class="a-img" lazyimg="" src="https://smartbanking.bidv.com.vn/assets/media/svg/accent/user.svg">
+                </div>
+                <div id="error-username"></div>
+                <div id="password">
+                    <input class="pass" placeholder="Mật khẩu" maxlength="40" type="password" } />
+                    <label id="mk">Mật khẩu</label>
+                    <img alt="" class="b-img" lazyimg="" src="https://smartbanking.bidv.com.vn/assets/media/svg/accent/lock.svg">
+                    <i id="eye" class="fa-solid fa-eye"></i>
+                </div>
+                <div id="error-password"></div>
+                <div id="submit">
+                    <button id="btnsm">Đăng nhập</button>
+                </div>
+            </div>
+        </form>
+        <div id="forget_pass"><a href="/ForgetPass/Index" id="aaabbb">Quên mật khẩu?</a></div>
+    </div>
+    <div id="invalid">
+        <div id="f1">
+            <form id="aaa">
+                <div><img src="https://smartbanking.bidv.com.vn/assets/media/graph/error.svg" /></div>
+                <div id="ktc">Không thành công</div>
+                <div id="tt"><p id="tt1"></p></div>
+                <button id="btn-close">Đóng</button>
+            </form>
+
+        </div>
+    </div>
+    <div id="load">
+        <div class="loader">
+            <span class="fas fa-spinner xoay icon22"></span>
+        </div>
+    </div>
+</body>
+<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+<script>
+    $(document).ready(function () {
+        $("a").click(function () {
+            $("#load").css("display", "block");
+            setTimeout(function () {
+                $("#load").css("display", "none");
+            }, 1000);
+        });
+        if ($(".user").val() != "") {
+            $(".user").val("");
+        }
+        if ($(".pass").val() != "") {
+            $(".pass").val("");
+        }
+        $("#wrapper").css("margin-top", $(document).height() / 2 - 250);
+        $("#eye").click(function () {
+            if ($("#eye").attr("class") == "fa-solid fa-eye") {
+                $("#eye").attr("class", "fa-solid fa-eye-slash")
+                $(".pass").attr("type", "text");
+            }
+            else {
+                $("#eye").attr("class", "fa-solid fa-eye")
+                $(".pass").attr("type", "password");
+            }
+        });
+        $("#username").click(function () {
+            up_text();
+            if ($(".pass").val() === "") {
+                return_pass();
+            }
+        });
+        $(".pass").click(function () {
+            up_pass();
+            if ($(".user").val() === "") {
+                return_text();
+                error_none_username();
+            }
+            else if (check_sdt() == 0) {
+                $("#error-username").text("Số điện thoại vừa nhập không hợp lệ");
+                $("#username").css("border-bottom", "2px solid rgb(61, 132, 199)");
+            }
+            else if ($(".user").val() != "") {
+                $("#error-username").text("");
+                $("#username").css("border-bottom", "2px solid rgb(61, 132, 199)");
+            }
+        });
+        $("#form").submit(e => {
+            if ($(".user").val() == "" || $(".pass").val() == "") {
+                if ($(".user").val() == "") {
+                    if ($("#tdn").css("color") == "rgb(26, 182, 196)")
+                        return_text();
+                    error_none_username();
+                }
+                if ($(".pass").val() == "") {
+                    if ($("#mk").css("color") == "rgb(26, 182, 196)")
+                        return_pass();
+                    error_none_password();
+                }
+            }
+            else if (check_pass() == 0) {
+                $("#error-password").text("Mật khẩu là chuỗi tối thiểu 8 ký tự. Quý khách vui lòng kiểm tra lại.");
+                $("#password").css("border-bottom", "2px solid rgb(223, 71, 71)");
+            }
+            else {
+                $("#load").css("display", "block");
+                $.ajax({
+                    url: '/CustomerLogin/CheckAccount',
+                    type: "POST",
+                    data: { User: $(".user").val(), Password: $(".pass").val() },
+                    success: function (data) {
+                        if (data == 0) {
+                            $("#load").css("display", "none");
+                            $("#invalid").css("display", "block");
+                            $("#tt1").text("Thông tin đăng nhập không chính xác");
+                        }
+                        else if (data == 1) {
+                            $("#load").css("display", "none");
+                            window.location.href = "/HomePageCustomer/Index";
+                        }
+                        else {
+                            $("#load").css("display", "none");
+                            $("#invalid").css("display", "block");
+                            $("#tt1").text("Tài khoản của bạn đã bi khóa");
+                        }
+                    }
+                });
+            }
+            e.preventDefault();
+        });
+        $("#aaa").submit(e => {
+            $("#invalid").css("display", "none");
+            e.preventDefault();
+        });
+        //
+        var SDT = "";
+        $('.user').on('input', function (e) {
+            if ($(".user").val().charCodeAt($(".user").val().length - 1) < 48 || $(".user").val().charCodeAt($(".user").val().length - 1) > 57) {
+                $(".user").val(SDT);
+            }
+            SDT = $(".user").val();
+        });
+        //
+        function check_sdt() {
+            const sdt = $(".user").val();
+            if (sdt.length > 0 && sdt.length < 10)
+                return 0;
+            else if (sdt.length === 0) {
+                return 1;
+            }
+            else if (sdt[0] != '0')
+                return 0;
+            else {
+                var check = 1;
+                for (var i = 0; i < 10; i++) {
+                    if (sdt.charCodeAt(i) < 48 || sdt.charCodeAt(i) > 57) {
+                        check--;
+                        break;
+                    }
+                }
+                return check;
+            }
+        }
+        function up_text() {
+            $(".user").attr("placeholder", "");
+            $("#tdn").css("display", "block");
+            $("#tdn").animate({ top: "-20px", "font-size": "14px" }, 200);
+            $("#tdn").css("color", "rgb(26, 182, 196)");
+        }
+        function up_pass() {
+            $(".pass").attr("placeholder", "");
+            $("#mk").css("display", "block");
+            $("#mk").animate({ top: "-20px", "font-size": "14px" }, 200);
+            $("#mk").css("color", "rgb(26, 182, 196)");
+        }
+        function error_none_username() {
+            $("#error-username").text("Quý khách vui lòng nhập tên đăng nhập.");
+            $("#username").css("border-bottom", "2px solid rgb(223, 71, 71)");
+        }
+        function error_none_password() {
+            $("#error-password").text("Quý khách vui lòng nhập mật khẩu.");
+            $("#password").css("border-bottom", "2px solid rgb(223, 71, 71)");
+        }
+        function return_text() {
+            $("#tdn").css("color", "black");
+            $("#tdn").animate({ top: "0px", "font-size": "21px" }, 0);
+            $("#tdn").css("display", "none");
+            $(".user").attr("placeholder", "Tên đăng nhập");
+        }
+        function return_pass() {
+            $(".pass").attr("placeholder", "Mật khẩu");
+            $("#mk").css("display", "none");
+            $("#mk").animate({ top: "0px", "font-size": "21px" }, 0);
+            $("#mk").css("color", "black");
+        }
+        function check_pass() {
+            if ($(".pass").val().length >= 8) {
+                return 1;
+            }
+            else {
+                return 0;
+            }
+        }
+    });
+</script>
+</html>

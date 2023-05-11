@@ -1,0 +1,153 @@
+﻿@using BankManagement.Models.DAO
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="~/Areas/Admin/Asset/css/bootstrap.min.css" rel="stylesheet">
+    <link href="~/Areas/Admin/Asset/css/font-awesome.min.css" rel="stylesheet">
+    <link href="~/Areas/Admin/Asset/css/datepicker3.css" rel="stylesheet">
+    <link href="~/Areas/Admin/Asset/css/styles.css" rel="stylesheet">
+    <title>@ViewBag.Title</title>
+    <script src="https://kit.fontawesome.com/b0bf115489.js" crossorigin="anonymous"></script>
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+</head>
+<body>
+    <nav class="navbar navbar-custom navbar-fixed-top" role="navigation">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#sidebar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#"><span>Banking</span>Admin</a>
+
+                <div style="display:flex; justify-content:end; margin-top:15px;">
+                    <a href="/Admin/Login/Index" style="font-size:20px;"><em class="fa fa-power-off">&nbsp;</em> Logout</a>
+                </div>
+
+            </div>
+        </div><!-- /.container-fluid -->
+    </nav>
+    <style>
+        .a1 {
+            font-size: 16px;
+            margin-top: -10px;
+            display: none;
+            text-align: left;
+            margin-left: 5px;
+        }
+    </style>
+    <div id="sidebar-collapse" class="col-sm-3 col-lg-2 sidebar">
+        <div class="profile-sidebar" id="ico">
+            <div class="profile-userpic">
+                <img src="https://scontent.fdad1-1.fna.fbcdn.net/v/t1.30497-1/143086968_2856368904622192_1959732218791162458_n.png?_nc_cat=1&ccb=1-7&_nc_sid=7206a8&_nc_ohc=MW_y1TlORRUAX-E1LLx&_nc_ht=scontent.fdad1-1.fna&oh=00_AT8hGAbWM4r8EFGN4z1ixWGUuIfmNX9hyQHV0yI9_QCGAg&oe=62DA49F8" class="img-responsive" alt="">
+            </div>
+            <div class="profile-usertitle">
+                <div class="profile-usertitle-name">@StaffDAO.Instance.Staff.NameStaff</div>
+                <div class="profile-usertitle-status"><span class="indicator label-success"></span>Online</div>
+            </div>
+
+            <div class="clear"></div>
+            <div>
+                <div class="a1">11/11/1111</div>
+            </div>
+
+        </div>
+        <div class="divider"></div>
+        <ul class="nav menu">
+            <li id="homepage" class="active"><a href="/Admin/HomePage/Index"><em class="fa fa-dashboard">&nbsp;</em> Trang chủ</a></li>
+            <li class="parent ">
+                <a data-toggle="collapse" href="#sub-item-1" id="qlhk" class="#">
+                    <em class="fa fa-navicon">&nbsp;</em> Quản lí khách hàng <span data-toggle="collapse" href="#sub-item-1" class="icon pull-right"><em class="fa fa-plus"></em></span>
+                </a>
+                <ul class="children collapse" id="sub-item-1">
+                    <li>
+                        <a id ="transfers" class="" href="/Admin/Transfers/Index">
+                            <span class="fa fa-arrow-right">&nbsp;</span> Nạp tiền
+                        </a>
+                    </li>
+                    <li>
+                        <a id="createaccount" class="" href="/Admin/CreateAccount/Index">
+                            <span class="fa fa-arrow-right">&nbsp;</span> Tạo tài khoản
+                        </a>
+                    </li>
+                    <li>
+                        <a id="findaccount" class="" href="/Admin/Find_EditCustomer/Index">
+                            <span class="fa fa-arrow-right">&nbsp;</span> Tìm kiếm & Chỉnh sửa
+                        </a>
+                    </li>
+                </ul>
+            </li>
+
+            <li class="parent">
+                <a data-toggle="collapse" href="#sub-item-2">
+                    <em class="fa fa-navicon">&nbsp;</em> Quản lí nhân viên <span data-toggle="collapse" href="#sub-item-1" class="icon pull-right"><em class="fa fa-plus"></em></span>
+                </a>
+                <ul class="children collapse" id="sub-item-2">
+                    <li>
+                        <a class="" href="#">
+                            <span class="fa fa-arrow-right">&nbsp;</span> Thêm nhân viên
+                        </a>
+                    </li>
+                    <li>
+                        <a class="" href="#">
+                            <span class="fa fa-arrow-right">&nbsp;</span> Chỉnh sửa thông tin
+                        </a>
+                    </li>
+                    <li>
+                        <a class="" href="#">
+                            <span class="fa fa-arrow-right">&nbsp;</span> Tìm kiếm
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            <li class="parent">
+                <a data-toggle="collapse" href="#sub-item-3">
+                    <em class="fa fa-navicon">&nbsp;</em> Quản lí ATM <span data-toggle="collapse" href="#sub-item-1" class="icon pull-right"><em class="fa fa-plus"></em></span>
+                </a>
+                <ul class="children collapse" id="sub-item-3">
+                    <li>
+                        <a class="" href="#">
+                            <span class="fa fa-arrow-right">&nbsp;</span> Thêm cây ATM
+                        </a>
+                    </li>
+                    <li>
+                        <a class="" href="#">
+                            <span class="fa fa-arrow-right">&nbsp;</span> Chỉnh sửa thông tin
+                        </a>
+                    </li>
+                    <li>
+                        <a class="" href="#">
+                            <span class="fa fa-arrow-right">&nbsp;</span> Tìm kiếm
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            <li><a href="widgets.html"><em class="fa fa-calendar">&nbsp;</em> Thống kê</a></li>
+        </ul>
+    </div><!--/.sidebar-->
+
+    @RenderBody()
+    
+    <script src="~/Areas/Admin/Asset/js/jquery-1.11.1.min.js"></script>
+    <script src="~/Areas/Admin/Asset/js/bootstrap.min.js"></script>
+    <script src="~/Areas/Admin/Asset/js/chart.min.js"></script>
+    <script src="~/Areas/Admin/Asset/js/chart-data.js"></script>
+    <script src="~/Areas/Admin/Asset/js/easypiechart.js"></script>
+    <script src="~/Areas/Admin/Asset/js/easypiechart-data.js"></script>
+    <script src="~/Areas/Admin/Asset/js/bootstrap-datepicker.js"></script>
+    <script src="~/Areas/Admin/Asset/js/custom.js"></script>
+    <script>
+        $(document).ready(function () {
+            $("#ico").hover(function () {
+                $(".a1").css("display", "block");
+            }, function () {
+                $(".a1").css("display", "none");
+            });
+        });
+    </script>
+</body>
+</html>

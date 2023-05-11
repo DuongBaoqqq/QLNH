@@ -1,0 +1,395 @@
+﻿
+@{
+    ViewBag.Title = "Quên mật khẩu";
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+    
+    <title>Document</title>
+</head>
+<body>
+    <style>
+        .loader {
+            width: 100%;
+            height: 100%;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 100000000000;
+            display: block;
+            overflow: hidden;
+        }
+
+        .icon22 {
+            font-size: 80px;
+            color: #fff;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            margin-top: -40px;
+            margin-left: -40px;
+        }
+
+        .xoay {
+            animation: xoay 1.5s linear infinite;
+            -moz-animation: xoay 1.5s linear infinite;
+            -ms-animation: xoay 1.5s linear infinite;
+            -o-animation: xoay 1.5s linear infinite;
+            -webkit-animation: xoay 1.5s linear infinite;
+        }
+
+        @@-webkit-keyframes xoay {
+            from {
+                -ms-transform: rotate(0deg);
+                -moz-transform: rotate(0deg);
+                -o-transform: rotate(0deg);
+                -webkit-transform: rotate(0deg);
+                transform: rotate(0deg);
+            }
+
+            to {
+                -ms-transform: rotate(360deg);
+                -moz-transform: rotate(360deg);
+                -o-transform: rotate(360deg);
+                -webkit-transform: rotate(360deg);
+                transform: rotate(360deg);
+            }
+        }
+        body {
+            background: url("../../Asset/Images/back.jpg");
+        }
+
+        #wrapper {
+            display: flex;
+            justify-content: center;
+            position: relative;
+        }
+
+        #wrapper1 {
+            display: flex;
+            justify-content: center;
+            position: relative;
+        }
+
+        #A1 {
+            width: 500px;
+            margin-top: 20px;
+            height: auto;
+            background: white;
+            border-radius: 20px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        #A2 {
+            font-family: 'Open Sans', sans-serif;
+            margin-top: 20px;
+            font-size: 24px;
+            font-weight: 600;
+            text-align: center;
+        }
+
+        #A3 {
+            color: rgb(0, 102, 173);
+            background: rgb(235,247,255);
+            width: 80%;
+            padding-left: 5%;
+            margin-left: 7%;
+            border-radius: 10px;
+            margin-top: 20px;
+        }
+
+        .input {
+            padding: 5px;
+            margin: 20px 20px 0px 20px;
+            display: flex;
+            position: relative;
+            width: 80%;
+            border-bottom: 1px solid rgb(61, 132, 199);
+            margin-left: 7%;
+        }
+
+        .user {
+            border: none;
+            outline: none;
+            width: 100%;
+            font-size: 18px;
+        }
+
+        #btnsm {
+            height: 55px;
+            width: 84%;
+            margin-left: 30px;
+            border-radius: 10px;
+            border: none;
+            background: linear-gradient(-90deg,rgb(0,108, 173),rgb(0,182,174));
+            color: white;
+            font-weight: 500;
+            font-size: 16px;
+            cursor: pointer;
+            margin-top: 50px;
+            margin-bottom: 30px;
+        }
+
+            #btnsm:hover {
+                background: linear-gradient(90deg,rgb(0,108, 173),rgb(0,182,174));
+            }
+
+        .D {
+            margin-top: 5px;
+            margin-left: 35px;
+            color: red;
+        }
+
+        #invalid {
+            position: absolute;
+            background: rgba(77, 74, 74, 0.4);
+            top: 0;
+            bottom: 0;
+            right: 0;
+            left: 0;
+            display: none;
+            justify-content: center;
+            align-items: center;
+        }
+
+        #www {
+            background: white;
+            height: auto;
+            width: 400px;
+            border-radius: 10px;
+            padding-bottom: 30px;
+        }
+
+        #vvv {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            font-family: 'Open Sans', sans-serif;
+        }
+
+        #btnsm1 {
+            height: 55px;
+            width: 300px;
+            border-radius: 10px;
+            border: none;
+            background: linear-gradient(-90deg,rgb(0,108, 173),rgb(0,182,174));
+            color: white;
+            font-weight: 500;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+            #btnsm1:hover {
+                background: linear-gradient(90deg,rgb(0,108, 173),rgb(0,182,174));
+            }
+
+        #sh {
+            width: 80%;
+            text-align: center;
+        }
+
+        #A4 {
+            width: 500px;
+            margin-top: 20px;
+            height: auto;
+            background: white;
+            border-radius: 20px;
+            display: flex;
+            flex-direction: column;
+            margin-top: 150px;
+        }
+
+        #load {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            right: 0;
+            left: 0;
+            display: none;
+            background: rgba(77, 74, 74, 0.4);
+        }
+    </style>
+    <form id="form-submit">
+        <div id="wrapper">
+            <div id="A1">
+                <div id="A2">Quên mật khẩu</div>
+                <div id="A3"><p>Quý khách vui lòng cung cấp thông tin đã đăng ký dịch vụ SmartBanking để xác thực yêu cầu cấp lại mật khẩu. Quý khách cần đảm bảo thông tin cung cấp là chính xác.</p></div>
+                <div class="input">
+                    <input id="N1" class="user" placeholder="Số điện thoại đăng nhập" maxlength="10" />
+                </div>
+                <div id="error" class="D"></div>
+                <div class="input">
+                    <input id="N2" class="user" placeholder="Email đăng kí tài khoản" />
+                </div>
+                <div id="error1" class="D"></div>
+                <div class="input">
+                    <input id="N3" class="user" placeholder="Họ và tên" />
+                </div>
+                <div id="error2" class="D"></div>
+                <div class="input">
+                    <input id="N4" class="user" placeholder="Ngày sinh" type="text" onfocus="(this.type='date')" />
+                </div>
+                <div id="error3" class="D"></div>
+                <div class="input">
+                    <input id="N5" class="user" placeholder="CMND" />
+                </div>
+                <div id="error4" class="D"></div>
+                <div id="submit">
+                    <button id="btnsm">Tiếp tục</button>
+                </div>
+            </div>
+        </div>
+    </form>
+    <form id="form-submit1">
+        <div id="wrapper1">
+
+        </div>
+    </form>
+    <div id="invalid">
+        <div id="www">
+            <form id="sm">
+                <div id="vvv">
+                    <div style="margin-top: 40px;"><img id="imgx" src="https://smartbanking.bidv.com.vn/assets/media/graph/error.svg"></div>
+                    <div style="margin-top: 10px; font-size:22px;font-weight: 600;" id="eee">Không thành công</div>
+                    <div id="sh"><p class="p3">Thông tin xác thực không hợp lệ. Quý khách vui lòng kiểm tra lại.</p></div>
+                    <div id="submit1">
+                        <button id="btnsm1">Tiếp tục</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div id="load">
+        <div class="loader">
+            <span class="fas fa-spinner xoay icon22"></span>
+        </div>
+    </div>
+</body>
+<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+<script>
+    $(document).ready(function () {
+        var SDT = "";
+        $('#N1').on('input', function (e) {
+            if ($("#N1").val().charCodeAt($("#N1").val().length - 1) < 48 || $("#N1").val().charCodeAt($("#N1").val().length - 1) > 57) {
+                $("#N1").val(SDT);
+            }
+            SDT = $("#N1").val();
+        });
+    });
+    $("#form-submit").submit(e => {
+        if ($("#N1").val() == "") {
+            $("#error").text("Quý khách vui lòng nhập số điện thoại đăng nhập.");
+        }
+        if ($("#N2").val() == "") {
+            $("#error1").text("Quý khách vui lòng nhập email đăng kí.");
+        }
+        if ($("#N3").val() == "") {
+            $("#error2").text("Quý khách vui lòng nhập họ tên.");
+        }
+        if ($("#N4").val() == "") {
+            $("#error3").text("Quý khách vui lòng nhập ngày sinh.");
+        }
+        if ($("#N5").val() == "") {
+            $("#error4").text("Quý khách vui lòng nhập CMND.");
+        }
+        $("#N1").click(function () {
+            $("#error").text("");
+        });
+        $("#N2").click(function () {
+            $("#error1").text("");
+        });
+        $("#N3").click(function () {
+            $("#error2").text("");
+        });
+        $("#N4").click(function () {
+            $("#error3").text("");
+        });
+        $("#N5").click(function () {
+            $("#error4").text("");
+        });
+        if ($("#N1").val() == "" || $("#N2").val() == "" || $("#N3").val() == "" || $("#N4").val() == "" || $("#N5").val() == "") {}
+        else {
+            $("#load").css("display", "block");
+            $.ajax({
+                url: '/ForgetPass/GetData',
+                type: "POST",
+                data: { SDT: $("#N1").val(), Email: $("#N2").val(), Name: $("#N3").val(), NS: $("#N4").val(), CMND: $("#N5").val() },
+                success: function (data) {
+                    if (data == false) {
+                        $("#load").css("display", "none");
+                        $("#invalid").css("display", "flex");
+                    }
+                    else {
+                        $("#wrapper").css("display", "none");
+                        $("#load").css("display", "none");
+                        html = "";
+                        html += "<div id='A4'>";
+                        html += "<div id='A2'>Quên mật khẩu</div>";
+                        html += "<div id='A3'><p>Quý khách vui lòng nhập mã OTP đã được gửi tới Email của Quý khách để xác thực giao dịch</p></div>";
+                        html += "<div class='input'>";
+                        html += "<input id='N6' class='user' placeholder='Mã xác nhận OTP' maxlength='6' />";
+                        html += "</div>";
+                        html += "<div id='error6' class='D'></div>";
+                        html += "<div id='submit'><button id='btnsm'>Tiếp tục</button></div>";
+                        html += "</div>";
+                        $("#wrapper1").html(html);
+                    }
+
+                }
+            });
+        }
+        e.preventDefault();
+    });
+    $("#form-submit1").submit(e => {
+        if ($("#N6").val() == "") {
+            $("#error6").text("Quý khách vui lòng nhập OTP.");
+        }
+        if ($("#N6").val() != "") {
+            $.ajax({
+                url: '/ForgetPass/GetOTP',
+                type: "POST",
+                data: { OTP: $("#N6").val()},
+                success: function (data) {
+                    $("#invalid").css("display", "flex");
+                    if (data == false) {
+                        $(".p3").text("Mã OTP không hợp lệ. Quí khách vui lòng kiểm tra lại.");
+                    }
+                    else {
+                        $.ajax({
+                            url: '/ForgetPass/GetNotifyReturnPass',
+                            type: "GET",
+                            success: function (res) {
+                                $(".p3").text(res);
+                                $("#imgx").attr("src", "https://smartbanking.bidv.com.vn/assets/media/graph/success.svg");
+                                $("#eee").text("Cấp lại mật khẩu thành công");
+                            }
+                        });
+
+                    }
+                }
+            });
+        }
+        e.preventDefault();
+    });
+    $("#sm").submit(e => {
+        $("#invalid").css("display", "none");
+        if ($("#imgx").attr("src") == "https://smartbanking.bidv.com.vn/assets/media/graph/success.svg") {
+            $("#load").css("display", "block");
+            $.ajax({
+                url: '/ForgetPass/SaveAndSeenNewPassword',
+                type: "GET",
+            });
+            $("#load").css("display", "none");
+            window.location.href = "/CustomerLogin/Index";
+        }
+        e.preventDefault();
+    });
+</script>
+</html>

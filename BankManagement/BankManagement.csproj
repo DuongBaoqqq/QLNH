@@ -1,0 +1,288 @@
+﻿<Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\EntityFramework.6.4.4\build\EntityFramework.props" Condition="Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.props')" />
+  <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{D1A5F973-14E5-4EC3-841A-AA2A69F0AB59}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>BankManagement</RootNamespace>
+    <AssemblyName>BankManagement</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <UseIISExpress>true</UseIISExpress>
+    <Use64BitIISExpress />
+    <IISExpressSSLPort>44396</IISExpressSSLPort>
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="System.Web.Razor">
+      <HintPath>..\packages\Microsoft.AspNet.Razor.3.2.7\lib\net45\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Webpages">
+      <HintPath>..\packages\Microsoft.AspNet.Webpages.3.2.7\lib\net45\System.Web.Webpages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Webpages.Deployment">
+      <HintPath>..\packages\Microsoft.AspNet.Webpages.3.2.7\lib\net45\System.Web.Webpages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Webpages.Razor">
+      <HintPath>..\packages\Microsoft.AspNet.Webpages.3.2.7\lib\net45\System.Web.Webpages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Helpers">
+      <HintPath>..\packages\Microsoft.AspNet.Webpages.3.2.7\lib\net45\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Web.Infrastructure">
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc">
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.7\lib\net45\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform">
+      <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Admin\Asset\css\bootstrap-table.css" />
+    <Content Include="Areas\Admin\Asset\css\bootstrap-theme.css" />
+    <Content Include="Areas\Admin\Asset\css\bootstrap-theme.min.css" />
+    <Content Include="Areas\Admin\Asset\css\bootstrap.css" />
+    <Content Include="Areas\Admin\Asset\css\bootstrap.min.css" />
+    <Content Include="Areas\Admin\Asset\css\datepicker.css" />
+    <Content Include="Areas\Admin\Asset\css\datepicker3.css" />
+    <Content Include="Areas\Admin\Asset\css\font-awesome.min.css" />
+    <Content Include="Areas\Admin\Asset\css\styles.css" />
+    <Content Include="Areas\Admin\Asset\js\bootstrap-datepicker.js" />
+    <Content Include="Areas\Admin\Asset\js\bootstrap.js" />
+    <Content Include="Areas\Admin\Asset\js\bootstrap.min.js" />
+    <Content Include="Areas\Admin\Asset\js\chart-data.js" />
+    <Content Include="Areas\Admin\Asset\js\chart.min.js" />
+    <Content Include="Areas\Admin\Asset\js\custom.js" />
+    <Content Include="Areas\Admin\Asset\js\easypiechart-data.js" />
+    <Content Include="Areas\Admin\Asset\js\easypiechart.js" />
+    <Content Include="Areas\Admin\Asset\js\html5shiv.min.js" />
+    <Content Include="Areas\Admin\Asset\js\jquery-1.11.1.min.js" />
+    <Content Include="Areas\Admin\Asset\js\lumino.glyphs.js" />
+    <Content Include="Areas\Admin\Asset\js\npm.js" />
+    <Content Include="Areas\Admin\Asset\js\respond.min.js" />
+    <Content Include="Asset\Images\back.jpg" />
+    <Content Include="Asset\Images\background.jpg" />
+    <Content Include="Asset\Images\bg.png" />
+    <Content Include="Asset\Images\check-icon.png" />
+    <Content Include="Asset\Images\Daco_6107680.png" />
+    <Content Include="Asset\Images\lock-icon.png" />
+    <Content Include="Asset\Images\login-bg.png" />
+    <Content Include="Asset\Images\Lovepik_com-450069982-withdraw money flat illustration vector.png" />
+    <Content Include="Asset\Images\pngegg.png" />
+    <Content Include="Asset\Images\smart_bank_logo.jpg" />
+    <Content Include="Asset\Images\thebidv.png" />
+    <Content Include="Asset\Images\user-icon.png" />
+    <Content Include="Global.asax" />
+    <Content Include="Web.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
+    <Compile Include="Areas\Admin\Controllers\CreateAccountController.cs" />
+    <Compile Include="Areas\Admin\Controllers\Find_EditCustomerController.cs" />
+    <Compile Include="Areas\Admin\Controllers\HomePageController.cs" />
+    <Compile Include="Areas\Admin\Controllers\LoginController.cs" />
+    <Compile Include="Areas\Admin\Controllers\TransfersController.cs" />
+    <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\ChangePasswordController.cs" />
+    <Compile Include="Controllers\ConfirmSavingAccountController.cs" />
+    <Compile Include="Controllers\ConfirmTransferController.cs" />
+    <Compile Include="Controllers\CreateNewAccountController.cs" />
+    <Compile Include="Controllers\CreateSavingAccountController.cs" />
+    <Compile Include="Controllers\CustomerLoginController.cs" />
+    <Compile Include="Controllers\FindATMAndAgencyController.cs" />
+    <Compile Include="Controllers\ForgetPassController.cs" />
+    <Compile Include="Controllers\HomePageCustomerController.cs" />
+    <Compile Include="Controllers\InterestRateController.cs" />
+    <Compile Include="Controllers\ListSavingAccountController.cs" />
+    <Compile Include="Controllers\MoneyTransferController.cs" />
+    <Compile Include="Controllers\ServiceController.cs" />
+    <Compile Include="Controllers\SuccessfullyCreateNewAccountController.cs" />
+    <Compile Include="Controllers\SuccessfullyCreateSavingAccountController.cs" />
+    <Compile Include="Controllers\SuccessfullyTransferController.cs" />
+    <Compile Include="Controllers\TransactionDetailsController.cs" />
+    <Compile Include="Controllers\TransfersCustomerController.cs" />
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DAO\AccountStaffDAO.cs" />
+    <Compile Include="Models\DAO\CustomerDAO.cs" />
+    <Compile Include="Models\DAO\CustomerTransfersDAO.cs" />
+    <Compile Include="Models\DAO\GetAddressDAO.cs" />
+    <Compile Include="Models\DAO\ListTransactionDAO.cs" />
+    <Compile Include="Models\DAO\SavingAccountDAO.cs" />
+    <Compile Include="Models\DAO\StaffDAO.cs" />
+    <Compile Include="Models\DAO\Transaction.cs" />
+    <Compile Include="Models\EF\ACCOUNT_CUSTOMER.cs" />
+    <Compile Include="Models\EF\ACCOUNT_LOCK_HISTORY.cs" />
+    <Compile Include="Models\EF\ACCOUNT_NUMBER_BANK.cs" />
+    <Compile Include="Models\EF\ACCOUNT_NUMBER_CUSTOMER.cs" />
+    <Compile Include="Models\EF\ACCOUNT_STAFF.cs" />
+    <Compile Include="Models\EF\AGENCY.cs" />
+    <Compile Include="Models\EF\BANK_RECEIVING_TRANSFER.cs" />
+    <Compile Include="Models\EF\BANK_TRANSFER_HISTORY.cs" />
+    <Compile Include="Models\EF\CASH_RECEIVING_BANK.cs" />
+    <Compile Include="Models\EF\CUSTOMER.cs" />
+    <Compile Include="Models\EF\CUSTOMER_LOGIN_HISTORY.cs" />
+    <Compile Include="Models\EF\CUSTOMER_TRANSACTION_HISTORY.cs" />
+    <Compile Include="Models\EF\DISTRICT.cs" />
+    <Compile Include="Models\EF\GET_SAVING.cs" />
+    <Compile Include="Models\EF\INTEREST_RATE.cs" />
+    <Compile Include="Models\EF\BankManagementDbContext.cs" />
+    <Compile Include="Models\EF\PROVINCE.cs" />
+    <Compile Include="Models\EF\SATFF_LOGIN_HISTORY.cs" />
+    <Compile Include="Models\EF\SAVING.cs" />
+    <Compile Include="Models\EF\STAFF.cs" />
+    <Compile Include="Models\LIB\Function.cs" />
+    <Compile Include="Models\LIB\SeenEmail.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\web.config" />
+    <Content Include="Areas\Admin\Views\web.config" />
+    <Content Include="Areas\Admin\Asset\css\bootstrap-theme.css.map" />
+    <Content Include="Areas\Admin\Asset\css\bootstrap-theme.min.css.map" />
+    <Content Include="Areas\Admin\Asset\css\bootstrap.css.map" />
+    <Content Include="Areas\Admin\Asset\css\bootstrap.min.css.map" />
+    <Content Include="Areas\Admin\Views\Shared\_Layout.cshtml" />
+    <Content Include="Areas\Admin\Views\Login\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\HomePage\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\CreateAccount\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Find_EditCustomer\Index.cshtml" />
+    <Content Include="Asset\Images\22-512.webp" />
+    <Content Include="Asset\Images\2312019.webp" />
+    <Content Include="Asset\Images\cashout-15-123567.webp" />
+    <Content Include="Areas\Admin\Views\Transfers\Index.cshtml" />
+    <None Include="packages.config" />
+    <Content Include="Views\CustomerLogin\Index.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\HomePageCustomer\Index.cshtml" />
+    <Content Include="Views\TransfersCustomer\Index.cshtml" />
+    <Content Include="Views\MoneyTransfer\Index.cshtml" />
+    <Content Include="Views\ConfirmTransfer\Index.cshtml" />
+    <Content Include="Views\SuccessfullyTransfer\Index.cshtml" />
+    <Content Include="Views\Service\Index.cshtml" />
+    <Content Include="Views\CreateNewAccount\Index.cshtml" />
+    <Content Include="Views\SuccessfullyCreateNewAccount\Index.cshtml" />
+    <Content Include="Views\FindATMAndAgency\Index.cshtml" />
+    <Content Include="Views\InterestRate\Index.cshtml" />
+    <Content Include="Views\Account\Index.cshtml" />
+    <Content Include="Views\TransactionDetails\Index.cshtml" />
+    <Content Include="Views\ForgetPass\Index.cshtml" />
+    <Content Include="Views\ChangePassword\Index.cshtml" />
+    <Content Include="Views\ListSavingAccount\Index.cshtml" />
+    <Content Include="Views\CreateSavingAccount\Index.cshtml" />
+    <Content Include="Views\ConfirmSavingAccount\Index.cshtml" />
+    <Content Include="Views\SuccessfullyCreateSavingAccount\Index.cshtml" />
+    <None Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+    <None Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+    <Folder Include="Areas\Admin\Data\" />
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>64756</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>https://localhost:44396/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
+    <Error Condition="!Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.4.4\build\EntityFramework.props'))" />
+    <Error Condition="!Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.4.4\build\EntityFramework.targets'))" />
+  </Target>
+  <Import Project="..\packages\EntityFramework.6.4.4\build\EntityFramework.targets" Condition="Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.targets')" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

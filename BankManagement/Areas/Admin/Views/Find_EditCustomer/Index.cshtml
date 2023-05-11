@@ -1,0 +1,807 @@
+﻿@using BankManagement.Models.DAO
+@{
+    ViewBag.Title = "tìm kiếm và chỉnh sửa";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+<script src="https://kit.fontawesome.com/b0bf115489.js" crossorigin="anonymous"></script>
+<style>
+    .a1 {
+        font-size: 16px;
+        margin-top: -10px;
+        display: none;
+        text-align: left;
+        margin-left: 5px;
+    }
+
+    .search {
+        font-size: 18px;
+        border-radius: 10px;
+    }
+
+    #find {
+        background: white;
+        width: 1100px;
+        height: auto;
+        border-radius: 20px;
+        display: flex;
+        flex-direction: column;
+        position: relative;
+    }
+
+    .tt {
+        margin-top: 20px;
+        align-self: center;
+        font-size: 30px;
+        font-weight: 600;
+    }
+
+    .a2 {
+        border-radius: 10px;
+        font-weight: 600;
+    }
+
+    .container {
+        padding: 32px;
+    }
+
+    .select-box {
+        display: flex;
+        width: 250px;
+        flex-direction: column;
+    }
+
+        .select-box .options-container {
+            background: #2f3640;
+            color: #f5f6fa;
+            max-height: 0;
+            width: 250px;
+            z-index: 100000000;
+            opacity: 0;
+            transition: all 0.4s;
+            border-radius: 8px;
+            overflow: hidden;
+            order: 1;
+            position: absolute;
+        }
+
+    .selected {
+        background: #2f3640;
+        border-radius: 8px;
+        margin-bottom: 8px;
+        color: #f5f6fa;
+        position: relative;
+        order: 0;
+    }
+
+        .selected::after {
+            content: "";
+            background: url("img/arrow-down.svg");
+            background-size: contain;
+            background-repeat: no-repeat;
+            position: absolute;
+            height: 100%;
+            width: 32px;
+            right: 10px;
+            top: 5px;
+            transition: all 0.4s;
+        }
+
+    .select-box .options-container.active {
+        max-height: 240px;
+        opacity: 1;
+        overflow-y: scroll;
+    }
+
+        .select-box .options-container.active + .selected::after {
+            transform: rotateX(180deg);
+            top: -6px;
+        }
+
+    .select-box .options-container::-webkit-scrollbar {
+        width: 8px;
+        background: #0d141f;
+        border-radius: 0 8px 8px 0;
+    }
+
+    .select-box .options-container::-webkit-scrollbar-thumb {
+        background: #525861;
+        border-radius: 0 8px 8px 0;
+    }
+
+    .select-box .option, .select-box .option1, .select-box .option2, .select-box .option0, .select-box .option3,
+    .selected {
+        padding: 12px 24px;
+        cursor: pointer;
+    }
+
+        .select-box .option:hover,
+        .select-box .option1:hover,
+        .select-box .option2:hover,
+        .select-box .option0:hover,
+        .select-box .option3:hover {
+            background: #414b57;
+        }
+
+    .select-box label {
+        cursor: pointer;
+    }
+
+    .select-box .option .radio,
+    .select-box .option1 .radio,
+    .select-box .option2 .radio,
+    .select-box .option0 .radio,
+    .select-box .option3 .radio {
+        display: none;
+    }
+
+    table {
+        font-family: arial, sans-serif;
+        border-collapse: collapse;
+        width: 100%;
+    }
+
+    td, th {
+        border: 1px solid #dddddd;
+        text-align: left;
+        padding: 8px;
+    }
+
+    tr:nth-child(even) {
+        background-color: #dddddd;
+    }
+
+    .e3 {
+        display: flex;
+        margin-left: 680px;
+        margin-top: 40px;
+        background: white;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+        .e3:hover {
+            background: #f1f2f2;
+        }
+
+    #invalid {
+        position: absolute;
+        background: rgba(77, 74, 74, 0.4);
+        top: 0;
+        bottom: 0;
+        right: 0;
+        left: 0;
+        display: none;
+        z-index: 1000000;
+        justify-content: center;
+        align-items: center;
+    }
+    #invl {
+        position: absolute;
+        background: rgba(77, 74, 74, 0.4);
+        top: 0;
+        bottom: 0;
+        right: 0;
+        left: 0;
+        display: none;
+        z-index: 1000000;
+        justify-content: center;
+        align-items: center;
+    }
+
+    #www {
+        background: white;
+        height: auto;
+        width: 1300px;
+        border-radius: 10px;
+        padding-bottom: 30px;
+    }
+
+    #vvv {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        font-family: 'Open Sans', sans-serif;
+    }
+
+    #submit1 {
+        display: flex;
+        justify-content: center;
+    }
+
+    #btnsm1 {
+        height: 55px;
+        width: 300px;
+        border-radius: 10px;
+        border: none;
+        margin-top: 20px;
+        background: linear-gradient(-90deg,rgb(0,108, 173),rgb(0,182,174));
+        color: white;
+        font-weight: 500;
+        font-size: 16px;
+        cursor: pointer;
+    }
+
+        #btnsm1:hover {
+            background: linear-gradient(90deg,rgb(0,108, 173),rgb(0,182,174));
+        }
+</style>
+<div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
+    <div class="row">
+        <ol class="breadcrumb">
+            <li>
+                <a href="#">
+                    <em class="fa fa-home"></em>
+                </a>
+            </li>
+            <li class="active">Tìm kiếm & Chỉnh sửa</li>
+        </ol>
+    </div><!--/.row-->
+
+    <div class="row">
+        <div class="col-lg-12">
+            <h1 class="page-header">Tìm kiếm & Chỉnh sửa</h1>
+        </div>
+    </div><!--/.row-->
+    <div id="find">
+        <div style="display:flex;justify-content:center;">
+            <div class="tt">Thông tin tìm kiếm</div>
+            <div class="e3">
+                <div style="font-size:20px;">Clear</div>
+                <div style="margin-left:5px;">
+                    <img src="https://smartbanking.bidv.com.vn/assets/media/svg/dark/refresh.svg" alt="" />
+                </div>
+            </div>
+
+        </div>
+
+        <div style="display:flex; justify-content:space-between;margin-top:20px;">
+            <div>
+                <input id="name" class="a2" style="margin-left:50px;" placeholder="Họ tên" />
+            </div>
+            <div>
+                <input id="CMND" class="a2" placeholder="CMND" />
+            </div>
+            <div>
+                <input id="email" class="a2" placeholder="Email" />
+            </div>
+            <div>
+                <input id="sdt" class="a2" style="margin-right:50px;" placeholder="SĐT" />
+            </div>
+        </div>
+        <div style="display:flex;">
+            <div class="container" id="r1">
+                <div class="select-box" id="r2">
+                    <div class="options-container" id="r3">
+                        @foreach (var i in GetAddressDAO.Instance.ListProvince)
+                        {
+                            <div class="option">
+                                <input type="radio" class="radio" id=@i.ID name="category" />
+                                <label for="automobiles">@i.NameProvince</label>
+                            </div>
+                        }
+                    </div>
+
+                    <div class="selected" id="r5">
+                        Tỉnh/Thành phố
+                    </div>
+                </div>
+            </div>
+            <div class="container">
+                <div class="select-box">
+                    <div class="options-container" id="r7">
+                    </div>
+
+                    <div class="selected" id="r6">
+                        Quận/Huyện
+                    </div>
+                </div>
+            </div>
+            <div class="container" id="r11">
+                <div class="select-box" id="r21">
+                    <div class="options-container" id="r31">
+                        <div class="option2">
+                            <input type="radio"
+                                   class="radio"
+                                   id="autom123obil"
+                                   name="category" />
+                            <label for="automobiles">Tất cả</label>
+                        </div>
+                        @foreach (var i in StaffDAO.Instance.ListNameCN())
+                        {
+                            <div class="option2">
+                                <input type="radio" class="radio" id=@i name="category" />
+                                <label for="film">@i</label>
+                            </div>
+                        }
+                    </div>
+
+                    <div class="selected" id="r51">
+                        Chi nhánh
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="table">
+        <h2>Danh sách khách hàng</h2>
+
+        <table id="row1">
+        </table>
+    </div>
+</div>	<!--/.main-->
+<div id="invalid">
+    <div id="www">
+        <form id="sm23">
+            <div style="display:flex;justify-content:center;width:100%; position:relative;">
+                <div style="width: 50%; display: flex; flex-direction:column; border-right: 10px solid rgb(255, 0, 0);">
+                    <div style="font-size: 28px; align-self:center;">Thông tin khách hàng</div>
+
+                    <div style="justify-content:center; width:100%;display:flex;">
+                        <div style="display:flex; flex-direction:column; width:50%;">
+                            <div style="align-self: flex-start; margin-left: 50px; border-bottom: 2px solid rgb(61, 132, 199); margin-top:10px;">
+                                <div style="font-size:18px;">Họ tên</div>
+                                <input id="name1" style="border: none; outline: none; width:250px; font-weight:600;" />
+                            </div>
+                            <div style="align-self: flex-start; margin-left: 50px; border-bottom: 2px solid rgb(61, 132, 199); margin-top:10px;">
+                                <div style="font-size:18px;">CMND</div>
+                                <input id="cmnd1" style="border: none; outline: none; width: 250px; font-weight: 600;" />
+                            </div>
+                            <div style="align-self: flex-start; margin-left: 50px; border-bottom: 2px solid rgb(61, 132, 199); margin-top:10px;">
+                                <div style="font-size:18px;">Số điện thoại</div>
+                                <input id="sdt1" style="border: none; outline: none; width: 250px; font-weight: 600;" />
+                            </div>
+                            <div style="align-self: flex-start; margin-left: 50px; border-bottom: 2px solid rgb(61, 132, 199); margin-top:10px;">
+                                <div style="font-size:18px;">Địa chỉ</div>
+                                <input id="diachi1" style="border: none; outline: none; width: 250px; font-weight: 600;" />
+                            </div>
+                            <div style="align-self: flex-start; margin-left: 50px; border-bottom: 2px solid rgb(61, 132, 199); margin-top:10px;">
+                                <div style="font-size:18px;">Ngày sinh</div>
+                                <input id="ngaysinh1" style="border: none; outline: none; width: 250px; font-weight: 600;" type="text" onfocus="(this.type='date')" />
+                            </div>
+                            <div style="align-self: flex-start; margin-left: 50px; border-bottom: 2px solid rgb(61, 132, 199); margin-top:10px;">
+                                <div style="font-size:18px;">Email</div>
+                                <input id="email1" style="border: none; outline: none; width: 250px; font-weight: 600;" />
+                            </div>
+                            <div id="gender" style="align-self: flex-start; margin-left: 50px; margin-top:10px;">
+                                <div>Giới tính</div>
+                                <div style="display:flex;">
+                                    <div class="form-check" id="nam">
+                                        <input class="form-check-input" type="radio" name="flexRadioDefault" id="f11">
+                                        <label class="form-check-label" for="flexRadioDefault1">
+                                            Nam
+                                        </label>
+                                    </div>
+
+                                    <div style="margin-left:50px;" class="form-check" id="nu">
+                                        <input class="form-check-input" type="radio" name="flexRadioDefault" id="f12">
+                                        <label class="form-check-label" for="flexRadioDefault2">
+                                            Nữ
+                                        </label>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div style="display:flex; flex-direction:column; width:50%;">
+                            <div class="container" id="r21">
+                                <div class="select-box" id="r22">
+                                    <div class="options-container" id="r23">
+                                        @foreach (var i in GetAddressDAO.Instance.ListProvince)
+                                        {
+                                            <div class="option0">
+                                                <input type="radio" class="radio" id=@i.ID name="category" />
+                                                <label for="automobiles">@i.NameProvince</label>
+                                            </div>
+                                        }
+                                    </div>
+
+                                    <div class="selected" id="r25">
+                                        Tỉnh/Thành phố
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="container">
+                                <div class="select-box">
+                                    <div class="options-container" id="r27">
+                                    </div>
+
+                                    <div class="selected" id="r26">
+                                        Quận/Huyện
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div style="width: 50%; display: flex; align-items: center;flex-direction:column; ">
+                    <div style="font-size: 28px;">Thông tin tài khoản</div>
+                    <div style="align-self:flex-start;margin-left:50px;margin-top:30px; font-weight:600;font-size:18px;" id="cn"></div>
+                    <div style="margin-top:50px;">
+                        <table id="tb">
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div id="submit1">
+                <button id="btnsm1">Tiếp tục</button>
+            </div>
+        </form>
+        <div id="invl">
+            <style>
+                #ar2{
+                    width:400px;
+                    height:auto;
+                    background:white;
+                    border-radius:20px;
+                    padding:30px;
+                }
+
+                #vvv {
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    font-family: 'Open Sans', sans-serif;
+                }
+                #btnsm2 {
+                    height: 55px;
+                    width: 300px;
+                    border-radius: 10px;
+                    border: none;
+                    margin-top: 20px;
+                    background: linear-gradient(-90deg,rgb(0,108, 173),rgb(0,182,174));
+                    color: white;
+                    font-weight: 500;
+                    font-size: 16px;
+                    cursor: pointer;
+                }
+
+                    #btnsm2:hover {
+                        background: linear-gradient(90deg,rgb(0,108, 173),rgb(0,182,174));
+                    }
+            </style>
+            <div id="ar2">
+                <form  id="tb1">
+                    <div id="vvv">
+                        <div style="margin-top: 40px;"><img id="imgxa" src="https://smartbanking.bidv.com.vn/assets/media/graph/success.svg"></div>
+                        <div style="margin-top: 10px; font-size:22px;font-weight: 600;text-align:center;" id="eeea">Cập nhật thông tin thành công</div>
+                        <div style="margin-top: 10px; font-size:16px;font-weight: 600;text-align:center;" id="d323s">Thông tin lưu thay đổi đã có trước trong hệ thống</div>
+                        <div id="submit1">
+                            <button id="btnsm2">Tiếp tục</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div style="position:absolute; top:30px; left:1300px; font-size:20px; cursor:pointer;" id="close">
+        <i class="fa-solid fa-xmark"></i>
+    </div>
+</div>
+<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+<script>
+    window.onload = function () {
+        var chart1 = document.getElementById("line-chart").getContext("2d");
+        window.myLine = new Chart(chart1).Line(lineChartData, {
+            responsive: true,
+            scaleLineColor: "rgba(0,0,0,.2)",
+            scaleGridLineColor: "rgba(0,0,0,.05)",
+            scaleFontColor: "#c5c7cc"
+        });
+    };
+    $("#homepage").attr("class", "#");
+    $("#qlhk").attr("class", "active");
+    $("#createaccount").attr("class", "active");
+    $(document).ready(function () {
+        GetListCustomer();
+        $(".e3").click(function () {
+            $('#name').val("");
+            $('#CMND').val("");
+            $('#sdt').val("");
+            $('#email').val("");
+            $('#r5').text("Tỉnh/Thành phố");
+            $('#r6').text("Quận/Huyện");
+            $('#r51').text("Chi nhánh");
+            GetListCustomer();
+        });
+        $('#name').on('input', function (e) {
+            GetListCustomer();
+        });
+        $('#CMND').on('input', function (e) {
+            GetListCustomer();
+        });
+        $('#sdt').on('input', function (e) {
+            GetListCustomer();
+        });
+        $('#email').on('input', function (e) {
+            GetListCustomer();
+        });
+        $("#ico").hover(function () {
+            $(".a1").css("display", "block");
+        }, function () {
+            $(".a1").css("display", "none");
+        });
+        $(".option").click(function () {
+            $.ajax({
+                url: '/Admin/CreateAccount/GetNameDistrictByProvince',
+                type: "POST",
+                data: { Province: $("#r5").text() },
+                success: function (data) {
+                    var html = "";
+                    for (let i = 0; i < data.length; i++) {
+                        html += "<div class='option1'>";
+                        html += "<input type='radio' class='radio1' id=" + i + " name='category'  style='display: none;'/>";
+                        html += " <label for='automobiles'>" + data[i] + "</label>";
+                        html += "</div>";
+                    }
+                    $("#r7").html(html);
+                    const optionsList1 = document.querySelectorAll(".option1");
+                    optionsList1.forEach(o => {
+                        o.addEventListener("click", () => {
+                            selected1.innerHTML = o.querySelector("label").innerHTML;
+                            GetListCustomer();
+                            optionsContainer1.classList.remove("active");
+
+                        });
+                    });
+                }
+            });
+        });
+        $(".option0").click(function () {
+            $.ajax({
+                url: '/Admin/CreateAccount/GetNameDistrictByProvince',
+                type: "POST",
+                data: { Province: $("#r25").text() },
+                success: function (data) {
+                    var html = "";
+                    for (let i = 0; i < data.length; i++) {
+                        html += "<div class='option3'>";
+                        html += "<input type='radio' class='radio1' id=" + i + " name='category' style='display: none;'/>";
+                        html += " <label for='automobiles'>" + data[i] + "</label>";
+                        html += "</div>";
+                    }
+                    $("#r27").html(html);
+                    const optionsContainer3 = document.querySelector("#r27");
+                    const optionsList1 = document.querySelectorAll(".option3");
+                    optionsList1.forEach(o => {
+                        o.addEventListener("click", () => {
+                            $("#r26").text(o.querySelector("label").innerHTML);
+                            optionsContainer3.classList.remove("active");
+
+                        });
+                    });
+                }
+            });
+        });
+        $("#tb1").submit(e => {
+            if ($("#imgxa").attr("src") == "https://smartbanking.bidv.com.vn/assets/media/graph/error.svg") {
+                $("#invl").css("display", "none");
+            }
+            else {
+                GetListCustomer();
+                $("#invl").css("display", "none");
+                $("#invalid").css("display", "none");
+            }
+            e.preventDefault();
+        });
+        $("#sm23").submit(e => {
+            if ($("#cmnd1").val().trim() == "" || $("#sdt1").val().trim() == "" || $("#diachi1").val().trim() == "" || $("#ngaysinh1").val().trim() == "" || $("#email1").val().trim() == "" || $("#name1").val().trim() == "") {
+
+            }
+            else {
+                var gender = false;
+                if (document.getElementById('f11').checked){
+                    gender = true;
+                }
+                $.ajax({
+                    url: '/Admin/Find_EditCustomer/ChangeInfoCustomer',
+                    type: "POST",
+                    data: { Name: $("#name1").val(), IdCard: $("#cmnd1").val(), PhoneNumber: $("#sdt1").val(), Address: $("#diachi1").val(), Birthday: $("#ngaysinh1").val(), Email: $("#email1").val(), Gender: gender, NameProvince: $("#r25").text(), NameDistrict: $("#r26").text() },
+                    success: function (data) {
+                        if (data == 1) {
+                            $("#invl").css("display", "flex");
+                            $("#imgxa").attr("src", "https://smartbanking.bidv.com.vn/assets/media/graph/success.svg");
+                            $("#eeea").text("Cập nhật thông tin thành công");
+                            $("#d323s").css("dislay", "none");
+                        }
+                        else if (data == 0) {
+                            $("#invl").css("display", "flex");
+                            $("#imgxa").attr("src", "https://smartbanking.bidv.com.vn/assets/media/graph/error.svg");
+                            $("#eeea").text("Cập nhật thông tin không thành công");
+                            $("#d323s").css("dislay", "block");
+                        }
+                        else {
+                            $("#invalid").css("display", "none");
+                        }
+                    }
+                });
+                
+            }
+            e.preventDefault();
+        })
+    });
+    $("#close").click(function () {
+        $("#invalid").css("display", "none");
+    });
+    function GetListCustomer() {
+        $.ajax({
+            url: '/Admin/Find_EditCustomer/GetListCustomer',
+            type: "POST",
+            data: { Name: $("#name").val(), IdCard: $("#CMND").val(), Email: $("#email").val(), PhoneNumber: $("#sdt").val(), NameProvince: $("#r5").text(), NameDistrict: $("#r6").text(), NameAgency: $("#r51").text() },
+            success: function (res) {
+                var html = "";
+                html += "<tr>"
+                html += " <th>STT</th>";
+                html += " <th>Họ tên</th>";
+                html += "<th>CMND</th>";
+                html += "<th>Số điện thoại</th>";
+                html += "<th>Email</th>";
+                html += "<th>Giới tính</th>";
+                html += "<th>Ngày sinh</th>";
+                html += "<th></th>";
+                html += "</tr>";
+                for (let i = 0; i < res.length; i++) {
+                    var a = 'f';
+                    cSharpDate = res[i].Birthday;
+                    var jsDate = new Date(parseInt(cSharpDate.replace(/[^0-9 +]/g, '')));
+                    var date = jsDate.getDate() + "/" + (jsDate.getMonth() + 1) + "/" + jsDate.getFullYear();
+                    html += "<tr>";
+                    html += "<td>" + (i + 1) + "</td>";
+                    html += "<td>" + res[i].NameCustomer + "</td>";
+                    html += "<td>" + res[i].IdCard + "</td>";
+                    html += "<td id='" + (a + i) + "'>" + res[i].PhoneNumber + "</td>";
+                    html += "<td>" + res[i].Email + "</td>";
+                    if (res[i].Gender)
+                        html += "<td>Nam</td>";
+                    else
+                        html += "<td>Nữ</td>";
+                    html += "<td>" + date + "</td>";
+                    html += "<td><div style='display:flex;justify-content:center'><a onclick='getId(this)' style='cursor:pointer;'><div style='display:flex;'><div><i class='fa-solid fa-pen-to-square'></i></div><div>Edit</div></div></a></div></td>";
+                    html += "</tr>"
+                }
+                $("#row1").html(html);
+
+            }
+        });
+    }
+    function getId(element) {
+
+        $.ajax({
+            url: '/Admin/Find_EditCustomer/SetCustomer',
+            type: "POST",
+            data: { PhoneNumber: $("#f" + (element.closest('tr').rowIndex - 1)).text() },
+        });
+        $("html, body").animate({ scrollTop: 0 }, "slow");
+        $("#invalid").css("display", "flex");
+        $.ajax({
+            url: '/Admin/Find_EditCustomer/GetCustomer',
+            type: "POST",
+            data: { PhoneNumber: $("#f" + (element.closest('tr').rowIndex - 1)).text() },
+            success: function (data) {
+                cSharpDate = data.data.Birthday;
+                var jsDate = new Date(parseInt(cSharpDate.replace(/[^0-9 +]/g, '')));
+                var date = (jsDate.getMonth() + 1) + "/" + jsDate.getDate() + "/" + jsDate.getFullYear();
+                $("#cmnd1").val(data.data.IdCard.trim());
+                $("#sdt1").val(data.data.PhoneNumber.trim());
+                $("#diachi1").val(data.data.AddressCustomer.trim());
+                $("#ngaysinh1").val(date);
+                $("#email1").val(data.data.Email.trim());
+                $("#name1").val(data.data.NameCustomer.trim());
+                $("#r25").text(data.data1.trim());
+                $("#r26").text(data.data2.trim());
+                $("#cn").text(data.data3.trim());
+                if (data.data.Gender == true) {
+            
+                    $("#f11").attr('checked', 'checked');
+                }
+                else {
+   
+                    $("#f12").attr('checked', 'checked');
+                }
+            }
+        });
+        $.ajax({
+            url: '/Admin/Find_EditCustomer/GetSTK',
+            type: "POST",
+            data: { PhoneNumber: $("#f" + (element.closest('tr').rowIndex - 1)).text() },
+            success: function (data) {
+                html = "";
+                html += "<tr><th>Số tài khoản</th><th>Số dư</th><th>Ngày cấp</th><th>Main</th><th>State</th><th>Lock</th></tr>";
+                for (let i = 0; i < data.length; i++) {
+                    cSharpDate = data[i].AccountIssueDate;
+                    var jsDate = new Date(parseInt(cSharpDate.replace(/[^0-9 +]/g, '')));
+                    var date = (jsDate.getMonth() + 1) + "/" + jsDate.getDate() + "/" + jsDate.getFullYear();
+                    html += "<tr><td>" + data[i].AccountNumber + "</td><td>" + ConvertToMoney(data[i].AccountBalance) + "</td><td>" + date + "</td><td><a style='cursor:pointer; font-weight:600;'>" + data[i].MainAccount + "</a></td><td><a style='cursor: pointer; font-weight: 600;'>" + data[i].StateAccount + "</a></td><td><a style='cursor: pointer; font-weight: 600;'>" + data[i].LockAccount + "</a></td></tr>";
+                }
+                $("#tb").html(html);
+            }
+        });
+    }
+    function getId1(element) {
+        alert(element.closest('tr').rowIndex);
+    }
+    const selected = document.querySelector("#r5");
+    const optionsContainer = document.querySelector("#r3");
+
+    const optionsList = document.querySelectorAll(".option");
+
+    selected.addEventListener("click", () => {
+        optionsContainer.classList.toggle("active");
+    });
+
+    optionsList.forEach(o => {
+        o.addEventListener("click", () => {
+            selected.innerHTML = o.querySelector("label").innerHTML;
+            GetListCustomer();
+            optionsContainer.classList.remove("active");
+        });
+    });
+
+
+    const selected0 = document.querySelector("#r25");
+    const optionsContainer0 = document.querySelector("#r23");
+
+    const optionsList0 = document.querySelectorAll(".option0");
+
+    selected0.addEventListener("click", () => {
+        optionsContainer0.classList.toggle("active");
+    });
+
+    optionsList0.forEach(o => {
+        o.addEventListener("click", () => {
+            selected0.innerHTML = o.querySelector("label").innerHTML;
+            GetListCustomer();
+            optionsContainer0.classList.remove("active");
+        });
+    });
+
+    const selected2 = document.querySelector("#r51");
+    const optionsContainer2 = document.querySelector("#r31");
+
+    const optionsList2 = document.querySelectorAll(".option2");
+
+    selected2.addEventListener("click", () => {
+        optionsContainer2.classList.toggle("active");
+    });
+
+    optionsList2.forEach(o => {
+        o.addEventListener("click", () => {
+            selected2.innerHTML = o.querySelector("label").innerHTML;
+            GetListCustomer();
+            optionsContainer2.classList.remove("active");
+        });
+    });
+
+
+    const selected1 = document.querySelector("#r6");
+    const optionsContainer1 = document.querySelector("#r7");
+    selected1.addEventListener("click", () => {
+        if ($("#r6").text().trim() != "Tỉnh/Thành phố") {
+            optionsContainer1.classList.toggle("active");
+        }
+    });
+    const selected3 = document.querySelector("#r26");
+    const optionsContainer3 = document.querySelector("#r27");
+    selected3.addEventListener("click", () => {
+        if ($("#r25").text().trim() != "Tỉnh/Thành phố") {
+            optionsContainer3.classList.toggle("active");
+        }
+    });
+    function ConvertToMoney(a) {
+        if (a == 0) {
+            return "0 VND";
+        }
+        var s = "";
+        let i = 0;
+        while (a != 0) {
+            if (i % 3 == 0 && i != 0) {
+                s = "," + s;
+            }
+            s = Math.floor(a % 10) + s;
+            i++;
+            a = Math.floor(a / 10);
+        }
+        s += " VND";
+        return s;
+    }
+</script>

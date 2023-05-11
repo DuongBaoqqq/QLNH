@@ -1,0 +1,99 @@
+﻿@using BankManagement.Models.DAO
+@{
+    ViewBag.Title = "Xác nhận mua tài khoản";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style>
+    body {
+        background: #f1f2f2;
+    }
+
+    #wrapper-page {
+        background: white;
+        height: auto;
+        width: 80%;
+        border-radius: 20px;
+        margin-top: 120px;
+        margin-left: 10%;
+        display: flex;
+        flex-direction: column;
+    }
+
+    #A1 {
+        margin-top: 30px;
+        font-size: 18px;
+        font-weight: 600;
+        align-self: center;
+    }
+
+    #A2 {
+        margin-top: 30px;
+        align-self: center;
+        color: blue;
+    }
+
+    #A3 {
+        margin-top: 5px;
+        align-self: center;
+        width: 53%;
+    }
+
+    #A4 {
+        margin-top: 30px;
+        align-self: center;
+        margin-bottom: 30px;
+    }
+
+    span {
+        display: flex;
+        justify-content: center;
+        font-weight: 500;
+    }
+
+    #btn-submit {
+        font-weight: 600;
+        font-size: 20px;
+        height: 50px;
+        width: 300px;
+        border-radius: 20px;
+        border: none;
+        color: white;
+        background: linear-gradient(-90deg,rgb(0,108, 173),rgb(0,182,174));
+        transition: all 0.3s ease-in-out;
+    }
+
+        #btn-submit:hover {
+            background: linear-gradient(90deg,rgb(0,108, 173),rgb(0,182,174));
+        }
+
+    .A5 {
+        color: blue;
+    }
+
+    #A6 {
+        align-self: center;
+        color: blue;
+        margin-top: 10px;
+    }
+
+    #A7 {
+        align-self: center;
+    }
+</style>
+<form action="/HomePageCustomer/Index">
+    <div id="wrapper-page">
+        <div id="A1">Giao dịch thành công</div>
+        <div id="A2">---------------------------------------------------------------------------------------------</div>
+        <div id="A3">
+            <span>Quý khách đã mở thành công tài khoản có số tài khoản</span>
+            <span class="A5">@CustomerDAO.Instance.GetLastAccountNumberCustomer().AccountNumber</span>
+            <span>vào lúc</span>
+            <span>@CustomerDAO.Instance.GetLastAccountNumberCustomer().AccountIssueDate</span>
+        </div>
+        <div id="A6">-----------------------------------------------</div>
+        <div id="A4">
+            <button id="btn-submit">Quay về trang chủ</button>
+        </div>
+    </div>
+</form>
+

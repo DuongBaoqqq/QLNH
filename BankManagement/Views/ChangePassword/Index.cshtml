@@ -1,0 +1,381 @@
+﻿
+@{
+    ViewBag.Title = "Đổi mật khẩu";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+    #wrapper-page {
+        width: 100%;
+        height: 550px;
+        background: #f1f2f2;
+        position: absolute;
+        right: 0px;
+        left: 0px;
+        top: 80px;
+    }
+
+    #hea {
+        margin-top: 20px;
+        display: flex;
+        margin-left: 10%;
+    }
+
+    .mt {
+        height: 30px;
+        margin-top: 1px;
+        margin-right: 15px;
+    }
+
+    .icon-mt {
+        position: relative;
+        z-index: 10;
+    }
+
+    .textct {
+        font-size: 26px;
+        font-weight: bold;
+    }
+
+    #circle {
+        position: absolute;
+        padding: 20px;
+        background: #f1f2f2;
+        z-index: -1;
+        border-radius: 25px;
+        left: -4px;
+        top: -4px;
+    }
+
+    #tc {
+        display: flex;
+    }
+
+    #ltc {
+        display: flex;
+        margin-top: 10px;
+        margin-left: 13%;
+    }
+
+    .tct {
+        color: black;
+        margin-top: 3px;
+        margin-left: 3px;
+        font-weight: 700;
+        font-size: 16px;
+    }
+
+    #ttt {
+        font-weight: 300;
+    }
+
+    #A1 {
+        height: auto;
+        width: 60%;
+        margin-left: 20%;
+        margin-top: 20px;
+        background: white;
+        border-radius: 30px;
+        position: relative;
+    }
+
+    #A2 {
+        margin-left: 20px;
+    }
+
+    #list {
+        list-style-type: circle;
+        margin-left: 10px;
+    }
+
+    .B1 {
+        display: flex;
+        border-bottom: 1px solid rgb(61, 132, 199);
+        margin-right: 30px;
+        width: 750px;
+        margin: 30px 0px 5px 0px;
+    }
+
+    input {
+        border: none;
+        outline: none;
+        width: 700px;
+        font-size: 18px;
+    }
+
+    #btntt {
+        margin-top: 30px;
+        margin-left: 70%;
+    }
+
+    #ttb {
+        font-size: 20px;
+        width: 80%;
+        height: 40px;
+        border-radius: 10px;
+        cursor: pointer;
+        color: white;
+        background: linear-gradient(-90deg,rgb(0,108, 173),rgb(0,182,174));
+        border: none;
+    }
+
+        #ttb:hover {
+            background: linear-gradient(90deg, rgb(0, 108, 173), rgb(0, 182, 174));
+        }
+
+    .error {
+        color: red;
+    }
+
+    #cover {
+        position: absolute;
+        background: rgba(77, 74, 74, 0.4);
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        z-index: 1000;
+        display: none;
+    }
+
+    #S1 {
+        height: 170px;
+        width: 300px;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        margin-top: -85px;
+        margin-left: -150px;
+        background: white;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 20px;
+        border-radius: 20px;
+        justify-items: center;
+    }
+
+    #btntt1 {
+        margin-top: 15px;
+        display: flex;
+    }
+
+    #ttb1 {
+        font-size: 20px;
+        width: 200px;
+        height: 40px;
+        border-radius: 10px;
+        cursor: pointer;
+        color: white;
+        background: linear-gradient(-90deg,rgb(0,108, 173),rgb(0,182,174));
+        border: none;
+    }
+
+        #ttb1:hover {
+            background: linear-gradient(90deg, rgb(0, 108, 173), rgb(0, 182, 174));
+        }
+</style>
+<div id="wrapper-page">
+    <div id="hea">
+        <div class="icon-mt">
+            <div id="circle"></div>
+            <a href="/TrangChu/Index"><img class="mt" src="https://smartbanking.bidv.com.vn/assets/media/svg/dark/left.svg" /></a>
+        </div>
+        <div class="textct">Đổi mật khẩu</div>
+    </div>
+    <div id="ltc">
+        <div>
+            <a href="/TrangChu/Index">
+                <div id="tc">
+                    <div id="icon-home"><img id="img-aa" src="https://smartbanking.bidv.com.vn/assets/media/svg/grey/home.svg" /></div>
+                    <div class="tct" id="ttt">Trang chủ</div>
+                </div>
+            </a>
+        </div>
+        <div class="tct">/</div>
+        <div class="tct">Đổi mật khẩu</div>
+    </div>
+    <form id="submit">
+        <div id="A1">
+            <div id="A2">
+                <div>
+                    <div>Mật khẩu phải thỏa mãn các điều kiện sau:</div>
+                    <div>
+                        <ul id="list">
+                            <li>Có độ dài 8 đến 20 kí tự</li>
+                            <li>Chứa ít nhất 01 kí tự số. 01 kí tự chữ và 01 kí tự đặc biệt</li>
+                        </ul>
+                    </div>
+                    <div>Ví dụ: b&123456;B&123456;&B123456</div>
+                </div>
+                <div class="B1">
+                    <div><img src="https://smartbanking.bidv.com.vn/assets/media/svg/accent/lock.svg" /></div>
+                    <div><input id="pass1" placeholder="Mật khẩu cũ" type="password" /></div>
+                    <div><i id="eye1" class="fa-solid fa-eye"></i></div>
+                </div>
+                <div id="error1" class="error"></div>
+                <div class="B1">
+                    <div><img src="https://smartbanking.bidv.com.vn/assets/media/svg/accent/lock.svg" /></div>
+                    <div><input id="pass2" placeholder="Mật khẩu mới" type="password" /></div>
+                    <div><i id="eye2" class="fa-solid fa-eye"></i></div>
+                </div>
+                <div id="error2" class="error"></div>
+                <div class="B1">
+                    <div><img src="https://smartbanking.bidv.com.vn/assets/media/svg/accent/lock.svg" /></div>
+                    <div><input id="pass3" placeholder="Nhập lại mật khẩu mới" type="password" /></div>
+                    <div><i id="eye3" class="fa-solid fa-eye"></i></div>
+                </div>
+                <div id="error3" class="error"></div>
+                <div id="btntt">
+                    <button id="ttb">Đổi mật khẩu</button>
+                </div>
+            </div>
+        </div>
+    </form>
+    <div id="cover">
+        <form action="/CustomerLogin/Index">
+            <div id="S1">
+                <div><img src="https://smartbanking.bidv.com.vn/assets/media/graph/success.svg" /></div>
+                <div style="font-size: 18px;margin: 10px;">Đổi mật khẩu thành công</div>
+                <div>Quý khách vui lòng đăng nhập lại.</div>
+                <div id="btntt1">
+                    <button id="ttb1">Tiếp tục</button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+
+    <script>
+        $(document).ready(function () {
+            $('#pass3').prop('disabled', true);
+
+            $(".mt").hover(function () {
+                $("#circle").css("background", "white");
+            }, function () {
+                $("#circle").css("background", "#f1f2f2");
+            });
+            $("#tc").hover(function () {
+                $("#img-aa").attr("src", "https://smartbanking.bidv.com.vn/assets/media/svg/accent/home.svg");
+                $("#ttt").css("color", "#03ab9c");
+            }, function () {
+                $("#ttt").css("color", "black");
+                $("#img-aa").attr("src", "https://smartbanking.bidv.com.vn/assets/media/svg/grey/home.svg");
+
+            });
+            $("#eye1").click(function () {
+                if ($("#eye1").attr("class") == "fa-solid fa-eye") {
+                    $("#eye1").attr("class", "fa-solid fa-eye-slash")
+                    $("#pass1").attr("type", "text");
+                }
+                else {
+                    $("#eye1").attr("class", "fa-solid fa-eye")
+                    $("#pass1").attr("type", "password");
+                }
+            });
+            $("#eye2").click(function () {
+                if ($("#eye2").attr("class") == "fa-solid fa-eye") {
+                    $("#eye2").attr("class", "fa-solid fa-eye-slash")
+                    $("#pass2").attr("type", "text");
+                }
+                else {
+                    $("#eye2").attr("class", "fa-solid fa-eye")
+                    $("#pass2").attr("type", "password");
+                }
+            });
+            $("#eye3").click(function () {
+                if ($("#eye3").attr("class") == "fa-solid fa-eye") {
+                    $("#eye3").attr("class", "fa-solid fa-eye-slash")
+                    $("#pass3").attr("type", "text");
+                }
+                else {
+                    $("#eye3").attr("class", "fa-solid fa-eye")
+                    $("#pass3").attr("type", "password");
+                }
+            });
+            $('#pass2').on('input', function (e) {
+                $("#error2").text(CheckPass($("#pass2").val()));
+                if ($("#error2").text() == "") {
+                    $('#pass3').prop('disabled', false);
+                }
+            });
+            $('#pass2').click(function () {
+                if ($('#pass1').val() == "") {
+                    $("#error1").text("Nhập mật khẩu hiện tại");
+                }
+                else {
+                    $.ajax({
+                        url: '/ChangePassword/CheckPass',
+                        type: "POST",
+                        data: { Pass: $("#pass1").val() },
+                        success: function (data) {
+                            if (data == false) {
+                                $("#error1").text("Mật khẩu hiện tại không đúng");
+                                $('#pass2').prop('disabled', true);
+                            }
+                        }
+                    });
+                }
+            });
+            $('#pass1').on('input', function (e) {
+                if ($("#error1").text() == "Mật khẩu hiện tại không đúng") {
+                    $.ajax({
+                        url: '/ChangePassword/CheckPass',
+                        type: "POST",
+                        data: { Pass: $("#pass1").val() },
+                        success: function (data) {
+                            if (data == true) {
+                                $("#error1").text("");
+                                $('#pass2').prop('disabled', false);
+                            }
+                        }
+                    });
+                }
+            });
+            $('#pass3').on('input', function (e) {
+                if ($("#pass2").val() != $("#pass3").val())
+                    $("#error3").text("Mật khẩu không khớp");
+                else {
+                    $("#error3").text("");
+                }
+            });
+            $("#submit").submit(e => {
+                if ($("#error3").text() == "" && $("#error2").text() == "" && $("#error1").text() == "") {
+                    $.ajax({
+                        url: '/ChangePassword/ChangePass',
+                        type: "POST",
+                        data: { Pass: $("#pass2").val() },
+                    });
+                    $("#cover").css("display", "block");
+                }
+                e.preventDefault();
+
+            });
+        });
+        function CheckPass(pass) {
+            if (pass.length < 8) {
+                return "Mật khẩu tối thiểu 8 kí tự";
+            }
+            else {
+                if (!(/[a-z]/.test(pass))) {
+                    return "Mật khẩu chứa ít nhất 1 kí tự thường";
+                }
+                else if (!(/[A-Z]/.test(pass))) {
+                    return "Mật khẩu chứa ít nhất 1 kí tự in hoa";
+                }
+                else if (!(/\d/.test(pass))) {
+                    return "Mật khẩu chứa ít nhất 1 kí tự số";
+                }
+                else if (!(/[!@@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+/.test(pass))) {
+                    return "Mật khẩu chứa ít nhất 1 kí tự đặc biệt";
+                }
+                else if ($('#pass2').val() == $('#pass1').val()) {
+                    return "Mật khẩu mới không được trùng với mặt khẩu cũ";
+                }
+                else {
+                    return "";
+                }
+            }
+        }
+    </script>
+

@@ -1,0 +1,432 @@
+﻿
+@{
+    ViewBag.Title = "Chuyển tiền";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+<style>
+    .a1 {
+        font-size: 16px;
+        margin-top: -10px;
+        display: none;
+        text-align: left;
+        margin-left: 5px;
+    }
+
+    #ttgd {
+        width: 78%;
+        height: auto;
+        margin-left: 11%;
+        background: white;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        border-radius: 20px;
+        padding: 20px;
+    }
+
+    #D1 {
+        margin-top: 30px;
+        display: flex;
+        border-bottom: 2px solid rgb(61, 132, 199);
+        width: 70%;
+        justify-content: space-between;
+    }
+
+    #D11 {
+        margin-top: 30px;
+        display: flex;
+        border-bottom: 2px solid rgb(61, 132, 199);
+        width: 70%;
+        justify-content: space-between;
+    }
+
+    #D2 {
+        display: flex;
+    }
+
+    #D3 {
+        display: flex;
+    }
+
+    .m1 {
+        width: 140px;
+        height: 40px;
+        background: green;
+        margin: 15px 30px 0px 30px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 20px;
+        cursor: pointer;
+        transition: all 0.2s ease-in-out;
+    }
+
+    #ipmoney {
+        font-size: 20px;
+        width: 250%;
+        margin-bottom: 2px;
+        border: none;
+        outline: none;
+    }
+
+    #ipmoney1 {
+        font-size: 20px;
+        width: 250%;
+        margin-bottom: 2px;
+        border: none;
+        outline: none;
+    }
+
+    #vnd {
+        font-size: 20px;
+        font-weight: 600;
+    }
+
+    #vnd1 {
+        font-size: 20px;
+        font-weight: 600;
+        color: blue;
+        cursor: pointer;
+    }
+
+    p {
+        font-weight: 600;
+    }
+
+    #D4 {
+        border-bottom: 2px solid rgb(61, 132, 199);
+        width: 70%;
+        margin-top: 15px;
+    }
+
+    #D5 {
+        border-bottom: 2px solid rgb(61, 132, 199);
+        width: 70%;
+        margin-top: 15px;
+    }
+
+    #cbb {
+        display: flex;
+        justify-content: space-between;
+        margin: 7px 0px;
+        cursor: pointer;
+    }
+
+    #cbb1 {
+        display: flex;
+        justify-content: space-between;
+        margin: 7px 0px;
+    }
+
+    #nc {
+        font-size: 20px;
+        font-weight: 500;
+    }
+
+    #icon-arrow {
+        font-size: 16px;
+    }
+
+    #choice {
+        position: absolute;
+        width: 55%;
+        height: auto;
+        border-radius: 20px;
+        margin-top: 3px;
+        background: #f1f2f2;
+        display: none;
+    }
+
+    .A1 {
+        font-size: 20px;
+        height: 30px;
+        width: 98.4%;
+        margin: 5px 0px 5px 10px;
+        cursor: pointer;
+    }
+
+    #A11:hover {
+        background: rgb(61, 132, 199);
+    }
+
+    #A12:hover {
+        background: rgb(61, 132, 199);
+    }
+
+    #ndct {
+        width: 310%;
+        font-size: 16px;
+        font-weight: 600;
+        border: none;
+        outline: none;
+    }
+
+    #btnsm {
+        width: 300px;
+        height: 50px;
+        margin: 20px 0px 0px 0px;
+        border-radius: 10px;
+        border: none;
+        background: linear-gradient(-90deg,rgb(0,108, 173),rgb(0,182,174));
+        color: white;
+        font-weight: 600;
+        font-size: 16px;
+        cursor: pointer;
+    }
+
+        #btnsm:hover {
+            background: linear-gradient(90deg,rgb(0,108, 173),rgb(0,182,174));
+        }
+
+    #sotien {
+        position: absolute;
+        top: 127px;
+        left: 313px;
+        font-size: 22px;
+        display: none;
+    }
+
+    #sotien1 {
+        position: absolute;
+        top: 127px;
+        left: 313px;
+        font-size: 22px;
+        display: none;
+    }
+
+    #stringmoney {
+        align-self: flex-start;
+        margin-top: 10px;
+        margin-left: 130px;
+        color: blue;
+        font-size: 18px;
+        font-weight: 500;
+    }
+
+    #error {
+        align-self: flex-start;
+        margin-top: 5px;
+        margin-left: 160px;
+        color: red;
+        font-weight: 500;
+    }
+
+    #error1 {
+        align-self: flex-start;
+        margin-top: 10px;
+        margin-left: 160px;
+        color: red;
+        font-weight: 500;
+    }
+
+    .tennguoinhan {
+        align-self: flex-start;
+        margin-left: 129px;
+    }
+
+    #invalid {
+        position: absolute;
+        background: rgba(77, 74, 74, 0.4);
+        top: 0;
+        bottom: 0;
+        right: 0;
+        left: 0;
+        display: none;
+        z-index: 1000000;
+        justify-content: center;
+        align-items: center;
+    }
+
+    #www {
+        background: white;
+        height: auto;
+        width: 400px;
+        border-radius: 10px;
+        padding-bottom: 30px;
+    }
+
+    #vvv {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        font-family: 'Open Sans', sans-serif;
+    }
+
+    #btnsm1 {
+        height: 55px;
+        width: 300px;
+        border-radius: 10px;
+        border: none;
+        margin-top: 20px;
+        background: linear-gradient(-90deg,rgb(0,108, 173),rgb(0,182,174));
+        color: white;
+        font-weight: 500;
+        font-size: 16px;
+        cursor: pointer;
+    }
+
+        #btnsm1:hover {
+            background: linear-gradient(90deg,rgb(0,108, 173),rgb(0,182,174));
+        }
+</style>
+<div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
+    <div class="row">
+        <ol class="breadcrumb">
+            <li>
+                <a href="#">
+                    <em class="fa fa-home"></em>
+                </a>
+            </li>
+            <li class="active">Nạp tiền</li>
+        </ol>
+    </div><!--/.row-->
+
+    <div class="row">
+        <div class="col-lg-12">
+            <h1 class="page-header">Nạp tiền</h1>
+        </div>
+    </div><!--/.row-->
+    <form id="form">
+        <div id="ttgd">
+            <div id="D11">
+                <div>
+                    <input id="ipmoney1" placeholder="Số tài khoản" />
+                    <div id="sotien1">Số tài khoản</div>
+                </div>
+                <div id="vnd1">Kiểm tra</div>
+            </div>
+            <div class="tennguoinhan"></div>
+            <div id="D1">
+                <div>
+                    <input id="ipmoney" placeholder="Số tiền" disabled="disabled" />
+                    <div id="sotien">Số tiền</div>
+                </div>
+                <div id="vnd">VND</div>
+            </div>
+            <div id="stringmoney"></div>
+            <div id="D5">
+                <div style="font-weight:500">Nội dung giao dịch</div>
+                <div id="cbb1">
+                    <div><input id="ndct" /></div>
+                    <div id="lennoidung"></div>
+                </div>
+            </div>
+            <div id="error1"></div>
+            <div id="submit">
+                <button id="btnsm">Tiếp tục</button>
+            </div>
+        </div>
+    </form>
+</div>
+<div id="invalid">
+    <div id="www">
+        <form id="sm" action="/Admin/HomePage/Index">
+            <div id="vvv">
+                <div style="margin-top: 40px;"><img id="imgx" src="https://smartbanking.bidv.com.vn/assets/media/graph/success.svg"></div>
+                <div style="margin-top: 10px; font-size:22px;font-weight: 600;" id="eee">Chuyển tiền thành công</div>
+                <div id="submit1">
+                    <button id="btnsm1">Tiếp tục</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+<script>
+        window.onload = function () {
+            var chart1 = document.getElementById("line-chart").getContext("2d");
+            window.myLine = new Chart(chart1).Line(lineChartData, {
+                responsive: true,
+                scaleLineColor: "rgba(0,0,0,.2)",
+                scaleGridLineColor: "rgba(0,0,0,.05)",
+                scaleFontColor: "#c5c7cc"
+            });
+        };
+        $("#homepage").attr("class", "#");
+        $("#qlhk").attr("class", "active");
+        $("#transfers").attr("class", "active");
+        $(document).ready(function () {
+            $("#ndct").val("Nạp tiền tài khoản");
+            $("#form").submit(e => {
+                if ($("#ipmoney").val() != "") {
+                    $.ajax({
+                        url: '/Admin/Transfers/SaveTransaction',
+                        type: "POST",
+                        data: { Money: $("#ipmoney").val(), STK: $("#ipmoney1").val(), Content: $("#ndct").val() },
+                    });
+                    $("#invalid").css("display", "flex");
+                }
+                e.preventDefault();
+            });
+            $("#vnd1").click(function () {
+                if ($("#ipmoney1").val() == "") {
+                    $(".tennguoinhan").text("Vui lòng nhập số tài khoản");
+                    $(".tennguoinhan").css("font-size", "14px");
+                    $(".tennguoinhan").css("margin-top", "12px");
+                    $(".tennguoinhan").css("color", "red");
+                    $(".tennguoinhan").css("font-weight", "500");
+                }
+                else {
+                    $.ajax({
+                        url: '/Admin/Transfers/GetNameCustomer',
+                        type: "POST",
+                        data: { AccountNumberCustomer: $("#ipmoney1").val() },
+                        success: function (data) {
+                            if (data == "Error") {
+                                $(".tennguoinhan").text("Số tài khoản thụ hưởng không tồn tại. Quý khách vui lòng kiểm tra lại");
+                                $(".tennguoinhan").css("font-size", "14px");
+                                $(".tennguoinhan").css("margin-top", "12px");
+                                $(".tennguoinhan").css("color", "red");
+                                $(".tennguoinhan").css("font-weight", "500");
+                            }
+                            else {
+                                $(".tennguoinhan").text(data);
+                                $(".tennguoinhan").css("color", "blue");
+                                $(".tennguoinhan").css("margin-top", "20px");
+                                $(".tennguoinhan").css("font-size", "18px");
+                                $(".tennguoinhan").css("font-weight", "500");
+                                $("#ipmoney").removeAttr("disabled");
+                                $("#ipmoney1").attr("disabled", "disabled");
+                            }
+                        }
+                    });
+                }
+
+            });
+            $('#ipmoney1').on('input', function (e) {
+                $(".tennguoinhan").text("");
+            });
+            var SoTien = "";
+            $('#ipmoney').on('input', function (e) {
+                if (($("#ipmoney").val().charCodeAt($("#ipmoney").val().length - 1) < 48 || $("#ipmoney").val().charCodeAt($("#ipmoney").val().length - 1) > 57)) {
+                    $("#ipmoney").val(SoTien);
+                }
+                if ($("#ipmoney").val().length > 15) {
+                    $("#ipmoney").val(SoTien);
+                }
+                SoTien = $("#ipmoney").val();
+                $.ajax({
+                    url: '/Admin/Transfers/StringMoney',
+                    type: "POST",
+                    data: { Money: $("#ipmoney").val() },
+                    success: function (data) {
+                        $("#stringmoney").text(data);
+                    }
+                });
+                $.ajax({
+                    url: '/Admin/Transfers/ConvertMoney',
+                    type: "POST",
+                    data: { SoTien: $("#ipmoney").val() },
+                    success: function (data) {
+                        $("#ipmoney").val(data);
+                    }
+                });
+
+            });
+            $("#ico").hover(function () {
+                $(".a1").css("display", "block");
+            }, function () {
+                $(".a1").css("display", "none");
+            });
+        });
+</script>

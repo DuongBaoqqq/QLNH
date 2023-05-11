@@ -1,0 +1,336 @@
+﻿@using BankManagement.Models.DAO
+@{
+    ViewBag.Title = "Trang chủ";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style>
+    body {
+        background: url("../../Asset/Images/background.jpg");
+    }
+
+    #page-wrapper {
+        height: 500px;
+        width: 80%;
+        flex-direction: column;
+        background: white;
+        margin: 8% 10% 0% 10%;
+        border-radius: 20px;
+        display: flex;
+        position: relative;
+        z-index: 1;
+    }
+
+    #tai-khoan {
+        display: flex;
+        width: 100%;
+        height: 120px;
+        background: rgb(188, 253, 186);
+        justify-content: space-between;
+        align-items: center;
+        border-top-left-radius: 20px;
+        border-top-right-radius: 20px;
+    }
+
+    #left {
+        margin-left: 5%;
+    }
+
+    #right {
+        margin-right: 5%;
+        display: flex;
+    }
+
+    #so-du {
+        margin-right: 20px;
+        text-align: right;
+    }
+
+    #danh-sach {
+        background: white;
+        border-radius: 20px;
+        font-size: 20px;
+        height: 35px;
+        margin-top: 5px;
+    }
+
+        #danh-sach:hover {
+            background: #f1f2f2;
+        }
+
+    #c {
+        display: flex;
+    }
+
+    #ds {
+        color: black;
+        margin-top: 7px;
+        margin-left: 10px;
+    }
+
+    #mt {
+        margin-top: 5px;
+    }
+
+    .a1 {
+        font-size: 17px;
+        font-weight: normal;
+    }
+
+    .a2 {
+        font-size: 22px;
+        font-weight: bold;
+        margin-top: 5px;
+        margin-right: 25px;
+    }
+
+    #aaaaa {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    #eye {
+        margin-left: 5px;
+        font-weight: 100;
+        cursor: pointer;
+        position: absolute;
+        font-size: 16px;
+        margin-top: 4px;
+    }
+
+    #chuc-nang {
+        height: 150px;
+        width: 100%;
+        display: flex;
+        margin-top: 30px;
+        justify-content: center;
+    }
+
+    .icon {
+        height: 100px;
+        width: 20%;
+        background: rgb(0, 180, 173);
+        border-radius: 20px;
+    }
+
+    .icon-img {
+        margin-top: 10px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .text1 {
+        font-size: 20px;
+        color: white;
+        font-weight: 500;
+    }
+
+    .icz {
+        height: 50px;
+    }
+
+    #f1 {
+        margin: 2% 2% 0% 0%;
+        transition: all 0.2s ease-in-out;
+    }
+
+        #f1:hover {
+            margin: 1% 2% 0% 0%;
+        }
+
+    #f2 {
+        margin: 2% 2% 0% 2%;
+        transition: all 0.2s ease-in-out;
+    }
+
+        #f2:hover {
+            margin: 1% 2% 0% 2%;
+        }
+
+    #f3 {
+        margin: 2% 2% 0% 2%;
+        transition: all 0.2s ease-in-out;
+    }
+
+        #f3:hover {
+            margin: 1% 2% 0% 2%;
+        }
+
+    #f4 {
+        margin: 2% 5% 0% 2%;
+        transition: all 0.2s ease-in-out;
+    }
+
+        #f4:hover {
+            margin: 1% 5% 0% 2%;
+        }
+
+    #tien-ich {
+        display: flex;
+        margin-top: 25px;
+        justify-content: center;
+    }
+
+    .icon1 {
+        height: 100px;
+        width: 20%;
+        border-radius: 20px;
+        margin-top: 2%;
+        transition: all 0.2s ease-in-out;
+    }
+
+    .icon-img1 {
+        display: flex;
+        margin-top: 10px;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .text2 {
+        color: black;
+        font-weight: 500;
+        font-size: 18px;
+    }
+
+    .iczz {
+        height: 80px;
+    }
+
+    #f11:hover {
+        margin-top: 1%;
+    }
+
+    #f12:hover {
+        margin-top: 1%;
+    }
+
+    #f13:hover {
+        margin-top: 1%;
+    }
+
+    #f14:hover {
+        margin-top: 1%;
+    }
+
+    #f15:hover {
+        margin-top: 1%;
+    }
+</style>
+<div id="page-wrapper">
+    <div id="tai-khoan">
+        <div id="left">
+            <div class="a1">Tài khoản thanh toán</div>
+            <div class="a2">@CustomerDAO.Instance.GetMainCustomer().AccountNumber</div>
+        </div>
+        <div id="right">
+            <div id="so-du">
+                <div class="a1">Số dư khả dụng</div>
+                <div class="a2" id="aaaaa">
+                    <div id="sodu">@CustomerDAO.ConvertMoney(CustomerDAO.Instance.GetMainCustomer().AccountBalance)</div>
+                    <div><i id="eye" class="fa-solid fa-eye"></i></div>
+                </div>
+            </div>
+            <div id="danh-sach">
+                <a href="/Account/Index">
+                    <div id="c">
+                        <div id="ds">Danh sách</div>
+                        <div id="mt">
+                            <img alt="alt"
+                                 src="https://smartbanking.bidv.com.vn/assets/media/svg/dark/right.svg">
+                        </div>
+                    </div>
+
+                </a>
+            </div>
+        </div>
+
+    </div>
+    <div id="chuc-nang">
+        <div class="icon" id="f1">
+            <a href="/TransfersCustomer/Index">
+                <div class="icon-img">
+                    <div>
+                        <img alt="" class="icz"
+                             src="https://smartbanking.bidv.com.vn/assets/media/svg/light/transfer.svg" />
+                    </div>
+                    <div class="text1">Chuyển tiền</div>
+                </div>
+            </a>
+        </div>
+        <div class="icon" id="f2">
+            <a href="/Service/Index">
+                <div class="icon-img">
+                    <div>
+                        <img alt="" class="icz"
+                             src="https://smartbanking.bidv.com.vn/assets/media/svg/light/credit card.svg">
+                    </div>
+                    <div class="text1">Dịch vụ thẻ</div>
+                </div>
+            </a>
+        </div>
+        <div class="icon" id="f3">
+            <a href="/ListSavingAccount/Index">
+                <div class="icon-img">
+                    <div>
+                        <img alt="" class="icz"
+                             src="https://smartbanking.bidv.com.vn/assets/media/svg/light/pig.svg">
+                    </div>
+                    <div class="text1">Tiết kiệm Online</div>
+                </div>
+            </a>
+        </div>
+    </div>
+    <div id="tien-ich">
+        <div class="icon1" id="f11">
+            <a href="/FindATMAndAgency/Index">
+                <div class="icon-img1">
+                    <div>
+                        <img alt="" class="iczz"
+                             src="https://smartbanking.bidv.com.vn/assets/media/svg-ic-main/tim-kiem-atm.svg">
+                    </div>
+                    <div class="text2">Tìm kiếm ATM</div>
+                </div>
+            </a>
+        </div>
+        <div class="icon1" id="f13">
+            <a href="/InterestRate/Index">
+                <div class="icon-img1">
+                    <div>
+                        <img alt="" class="iczz"
+                             src="https://smartbanking.bidv.com.vn/assets/media/svg-ic-main/lai-suat.svg">
+                    </div>
+                    <div class="text2">Lãi suất</div>
+                </div>
+            </a>
+        </div>
+        <div class="icon1" id="f15">
+            <a href="/CreateNewAccount/Index">
+                <div class="icon-img1">
+                    <div>
+                        <img alt="" class="iczz"
+                             src="https://smartbanking.bidv.com.vn/assets/media/svg-ic-main/mo-tk-so-dep.svg">
+                    </div>
+                    <div class="text2">Mở tài khoản như ý</div>
+                </div>
+            </a>
+        </div>
+    </div>
+</div>
+<script>
+    $(document).ready(function () {
+        var so_du = $("#sodu").text();
+        $("#sodu").text("••••••••••••••");
+        $("#eye").click(function () {
+            if ($("#eye").attr("class") == "fa-solid fa-eye") {
+                $("#eye").attr("class", "fa-solid fa-eye-slash");
+                $("#sodu").text(so_du);
+            }
+            else {
+                $("#eye").attr("class", "fa-solid fa-eye")
+                $("#sodu").text("••••••••••••••");
+            }
+        });
+    });
+</script>
+

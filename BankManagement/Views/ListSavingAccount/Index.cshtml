@@ -1,0 +1,337 @@
+﻿
+@{
+    ViewBag.Title = "Tài khoản tiết kiệm";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@using BankManagement.Models.DAO
+@using BankManagement.Models.LIB
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
+      crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css" />
+<style>
+    body, html {
+        height: 100%;
+        min-height: 100vh;
+        background-color: #f1f2f2 !important;
+    }
+
+    a {
+        text-decoration: none;
+    }
+
+    #circle {
+        width: 40px;
+        height: 40px;
+        background: #f1f2f2;
+        position: absolute;
+        top: 125px;
+        left: 160px;
+        border-radius: 25px;
+        z-index: 1;
+    }
+
+    .taikhoan {
+        margin-top: 5rem;
+    }
+
+    i {
+        font-weight: bold !important;
+    }
+
+    #refreshBtn {
+        font-size: 0.85rem;
+        font-weight: 600;
+        border-radius: 15px;
+        border: none;
+    }
+
+    .taiKhoanThanhToan {
+        border-radius: 20px;
+        position: relative;
+        z-index: 10;
+        overflow: hidden;
+    }
+
+    #dropDownBtn {
+        box-shadow: 1px 3px 5px rgba(0, 0, 0, 0.2);
+        z-index: 10;
+    }
+
+    .items {
+        opacity: 0;
+        max-height: 0;
+        background-color: #fafbfb;
+        transition: all 0.3s ease-in-out;
+    }
+
+        .items.active {
+            opacity: 1;
+            max-height: 1000px;
+        }
+
+    #downIcon {
+        transition: all 0.4s ease-in-out;
+    }
+
+        #downIcon.active {
+            transform: rotate(-180deg);
+        }
+
+    #ass {
+        position: absolute;
+        top: 0px;
+        right: 0px;
+        left: 0px;
+        bottom: 0px;
+        background: rgba(77, 74, 74, 0.4);
+        z-index: 1000000;
+        display: none;
+        justify-content: center;
+        align-items: center;
+    }
+
+    #asss {
+        width: 400px;
+        height: auto;
+        background: white;
+        border-radius: 20px;
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        padding: 20px;
+        position: relative;
+    }
+
+    .a1 {
+        margin-top: 10px;
+        font-size: 20px;
+        font-weight: 600;
+    }
+
+    .a2 {
+        margin-top: 20px;
+        width: 100%;
+    }
+
+    .a3 {
+        font-size: 18px;
+        font-weight: 300;
+        margin-left: 10px;
+    }
+
+    .q1 {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        margin: 5px;
+    }
+
+    .a4 {
+        font-size: 18px;
+        font-weight: 500;
+        margin-right: 10px;
+    }
+
+    #a0 {
+        position: absolute;
+        top: 10px;
+        left: 370px;
+        font-size: 26px;
+        cursor: pointer;
+    }
+</style>
+<section class="taikhoan">
+    <div class="container-lg">
+        <div class="p-md-5 d-flex align-items-center">
+            <div class="me-4">
+                <img src="https://smartbanking.bidv.com.vn/assets/media/svg/dark/left.svg" alt="" style="cursor:pointer;position: relative; z-index: 2;" />
+                <div id="circle"></div>
+            </div>
+            <div>
+                <h3 class="m-0 fw-semibold">Tài khoản tiết kiệm</h3>
+            </div>
+        </div>
+
+        <div class="mt-3 ps-5 pe-5 mb-4">
+            <div class="ps-md-5 d-flex align-items-center justify-content-between">
+                <div class="d-flex align-items-center">
+                    <img id="M1" class="me-2" src="https://smartbanking.bidv.com.vn/assets/media/svg/grey/home.svg" alt="" style="cursor:pointer;" />
+                    <span id="M2" class="opacity-50 me-2" style="font-weight: 600;cursor:pointer;"> Trang chủ</span>
+                    <span class="opacity-50 me-2" style="font-weight: 600">/</span>
+                    <strong>Tài khoản tiết kiệm</strong>
+                </div>
+                <form action="/CreateSavingAccount/Index">
+                    <button id="refreshBtn" class="d-flex align-items-center bg-white px-md-3 py-1 shadow-sm">
+                        <span class="d-md-inline d-none">Gửi tiết kiệm</span>
+                    </button>
+                </form>
+
+            </div>
+
+            <div></div>
+        </div>
+
+        <div class="px-md-5 mx-2 mt-5">
+            <div class="bg-white taiKhoanThanhToan shadow-sm">
+                <div role="button" class="header accordion px-5 py-4 shadow-sm">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <h6 class="mx-md-5 fw-bold mb-0">Tài khoản tiết kiệm (@CustomerDAO.Instance.GetCountListSavingAccount())</h6>
+
+                        <div role="button" id="dropDownBtn" class="rounded-circle p-1">
+                            <img id="downIcon" src="https://smartbanking.bidv.com.vn/assets/media/svg/dark/down.svg" alt="" />
+                        </div>
+                    </div>
+                </div>
+                <div class="items">
+                    <div class="p-5">
+                        @for (int i = 0; i < CustomerDAO.Instance.GetCountListSavingAccount(); i++)
+                        {
+                            <div id=@i style="border-radius: 15px;cursor:pointer;" class="axx mx-lg-5 row bg-white p-3">
+                                <div class="col-md-5 d-flex align-items-center">
+                                    <div role="button" class="me-3"><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Cdefs%3E%3Cstyle%3E.a,.b%7Bfill:none;%7D.b%7Bstroke:%23242526;stroke-linecap:round;stroke-linejoin:round;stroke-width:1.5px;%7D%3C/style%3E%3C/defs%3E%3Cpath class='a' d='M0,0H24V24H0Z'/%3E%3Crect class='b' width='10' height='12' rx='1.5' transform='translate(9 8)'/%3E%3Cpath class='b' d='M14,6a1.856,1.856,0,0,0-1.667-2H5.667A1.856,1.856,0,0,0,4,6v8a1.856,1.856,0,0,0,1.667,2' transform='translate(1)'/%3E%3C/svg%3E" alt="" /></div>
+
+                                    <div>
+                                        <strong class="me-2">@CustomerDAO.Instance.GetListSavingAccount()[i].ID</strong>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6 ms-5 ms-md-0 mt-3 mt-md-0">
+                                    <p class="mb-0">Số tiền tiết kiệm</p>
+                                    <div><strong>@CustomerDAO.ConvertMoney(CustomerDAO.Instance.GetListSavingAccount()[i].AmountOfMoney)</strong></div>
+                                </div>
+
+                                <div class="col-md-1 d-none d-md-block text-end">
+                                    <div role="button"><img style="transform: rotateY(180deg)" src="https://smartbanking.bidv.com.vn/assets/media/svg/dark/left.svg" alt="" /></div>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<div id="ass">
+    <div id="asss">
+        <div class="a1">Chi tiết tài khoản tiết kiệm</div>
+        <div class="a2">
+            <div class="q1">
+                <div class="a3">Mã giao dịch</div>
+                <div id="MV1" class="a4">312782</div>
+            </div>
+            <div class="q1">
+                <div class="a3">Số tiền</div>
+                <div id="MV2" class="a4">312782</div>
+            </div>
+            <div class="q1">
+                <div class="a3">Ngày chuyển</div>
+                <div id="MV3" class="a4">312782</div>
+            </div>
+            <div class="q1">
+                <div class="a3">Kì hạn</div>
+                <div id="MV4" class="a4">312782</div>
+            </div>
+            <div class="q1">
+                <div class="a3">Lãi suất</div>
+                <div id="MV5" class="a4">312782</div>
+            </div>
+        </div>
+        <i id="a0" class="fa-solid fa-xmark"></i>
+
+    </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+        crossorigin="anonymous">
+</script>
+<script>
+    $(document).ready(function () {
+        $.ajax({
+            url: '/ListSavingAccount/GetCountListSavingAccount',
+            type: "POST",
+            success: function (data) {
+                for (var i = 0; i < data; i++) {
+                    var s = "#";
+                    s += i;
+                    $(s).click(function () {
+                        var index = $(this).attr("id")[$(this).attr("id").length - 1].charCodeAt(0) - 48;
+                        SetSTK(index);
+                    });
+                }
+            }
+        });
+
+        $("#a0").click(function () {
+            $("#ass").css("display", "none");
+        })
+        $(".me-4").hover(function () {
+            $("#circle").css('background', 'white')
+        });
+        $(".me-4").mouseleave(function () {
+            $("#circle").css("background", "#f1f2f2");
+        });
+        $(".me-4").click(function () {
+            window.location.href = "/HomePageCustomer/Index";
+        });
+        $("#M1").click(function () {
+            window.location.href = "/HomePageCustomer/Index";
+        });
+        $("#M2").click(function () {
+            window.location.href = "/HomePageCustomer/Index";
+        });
+        $("#M1").hover(function () {
+            $("#M1").attr('src', 'https://smartbanking.bidv.com.vn/assets/media/svg/accent/home.svg')
+            $("#M2").css('color', '#03ab9c');
+        });
+        $("#M1").mouseleave(function () {
+            $("#M1").attr('src', 'https://smartbanking.bidv.com.vn/assets/media/svg/grey/home.svg')
+            $("#M2").css('color', 'black');
+        });
+        $("#M2").hover(function () {
+            $("#M1").attr('src', 'https://smartbanking.bidv.com.vn/assets/media/svg/accent/home.svg')
+            $("#M2").css('color', '#03ab9c');
+        });
+        $("#M2").mouseleave(function () {
+            $("#M1").attr('src', 'https://smartbanking.bidv.com.vn/assets/media/svg/grey/home.svg')
+            $("#M2").css('color', 'black');
+        });
+    });
+    function SetSTK(da) {
+        $.ajax({
+            url: '/ListSavingAccount/GetListSavingAccount',
+            type: "POST",
+            data: { index: da },
+            success: function (res) {
+                $("#ass").css("display", "flex");
+                for (let i = 1; i <= 5; i++){
+                    var a = "#MV" + i;
+                    $(a).text(res[i-1]);
+                }
+            }
+        });
+    }
+</script>
+<script>
+    const dropDownBtn = document.querySelector("#dropDownBtn");
+    const items = document.querySelector(".items");
+    const accordion = document.querySelector(".accordion");
+    const downIcon = document.querySelector("#downIcon");
+
+    const onDropDownClick = (e) => {
+        e.stopPropagation();
+        items.classList.toggle("active");
+        downIcon.classList.toggle("active");
+    };
+
+    function addListener() {
+        dropDownBtn.addEventListener("click", onDropDownClick);
+        accordion.addEventListener("click", onDropDownClick);
+    }
+
+    addListener();
+
+</script>
+
+

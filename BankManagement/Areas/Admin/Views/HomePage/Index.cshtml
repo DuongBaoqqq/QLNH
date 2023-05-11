@@ -1,0 +1,103 @@
+﻿@using BankManagement.Models.DAO
+@{
+    ViewBag.Title = "Trang chủ";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+<div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
+    <div class="row">
+        <ol class="breadcrumb">
+            <li>
+                <a href="#">
+                    <em class="fa fa-home"></em>
+                </a>
+            </li>
+            <li class="active">Trang chủ</li>
+        </ol>
+    </div><!--/.row-->
+
+    <div class="row">
+        <div class="col-lg-12">
+            <h1 class="page-header">Trang chủ</h1>
+        </div>
+    </div><!--/.row-->
+
+    <div class="panel panel-container">
+        <div class="row">
+            <div class="col-xs-6 col-md-3 col-lg-3 no-padding">
+                <div class="panel panel-teal panel-widget border-right">
+                    <div class="row no-padding">
+                        <em class="fa-solid fa-user" style="font-size: 26px;"></em>
+                        <div class="large">@StaffDAO.Instance.GetCountCustomerOfAgency()</div>
+                        <div class="text-muted">Khách hàng</div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-6 col-md-3 col-lg-3 no-padding">
+                <div class="panel panel-blue panel-widget border-right">
+                    <div class="row no-padding">
+                        <em class="fa-solid fa-clipboard-user" style="font-size: 26px;"></em>
+                        <div class="large">@StaffDAO.Instance.GetCountStaffOfAgency()</div>
+                        <div class="text-muted">Nhân viên</div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-6 col-md-3 col-lg-3 no-padding">
+                <div class="panel panel-orange panel-widget border-right">
+                    <div class="row no-padding">
+                        <em class="fa-solid fa-dollar-sign" style="font-size: 26px;"></em>
+                        <div class="large" style="font-size: 24px;margin-top: 18px;">@StaffDAO.Instance.GetAccountBalance()</div>
+                        <div class="text-muted" style="margin-top: 3px;">Số dư tài khoản</div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-6 col-md-3 col-lg-3 no-padding">
+                <div class="panel panel-red panel-widget ">
+                    <div class="row no-padding">
+                        <em class="fa-solid fa-dollar-sign" style="font-size: 26px;"></em>
+                        <div class="large" style="font-size: 24px;margin-top: 18px;">@StaffDAO.Instance.GetCash()</div>
+                        <div class="text-muted" style="margin-top: 3px;">Lượng tiền mặt</div>
+                    </div>
+                </div>
+            </div>
+        </div><!--/.row-->
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+            <h1 class="page-header" style="font-size: 24px;">Tổng quan hàng tháng</h1>
+        </div>
+    </div><!--/.row-->
+    <div class="row">
+        <div class="col-xs-6 col-md-3">
+            <div class="panel panel-default">
+                <div class="panel-body easypiechart-panel">
+                    <h4>Khách hàng mới</h4>
+                    <div class="easypiechart" id="easypiechart-blue" data-percent="92"><span class="percent">92%</span></div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-6 col-md-3">
+            <div class="panel panel-default">
+                <div class="panel-body easypiechart-panel">
+                    <h4>Lượng tiền giao dịch</h4>
+                    <div class="easypiechart" id="easypiechart-orange" data-percent="65"><span class="percent">65%</span></div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-6 col-md-3">
+            <div class="panel panel-default">
+                <div class="panel-body easypiechart-panel">
+                    <h4>Tiền nhận</h4>
+                    <div class="easypiechart" id="easypiechart-teal" data-percent="56"><span class="percent">56%</span></div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-6 col-md-3">
+            <div class="panel panel-default">
+                <div class="panel-body easypiechart-panel">
+                    <h4>Tiền gửi</h4>
+                    <div class="easypiechart" id="easypiechart-red" data-percent="27"><span class="percent">27%</span></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

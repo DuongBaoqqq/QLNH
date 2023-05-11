@@ -1,0 +1,153 @@
+﻿
+@using BankManagement.Models.DAO;
+@{
+    ViewBag.Title = "Lãi suất";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style>
+    #wrapper-page {
+        width: 100%;
+        height: 550px;
+        background: #f1f2f2;
+        position: absolute;
+        right: 0px;
+        left: 0px;
+        top: 80px;
+    }
+
+    body {
+        background: #f1f2f2;
+        height: auto;
+    }
+
+    #hea {
+        margin-top: 20px;
+        display: flex;
+        margin-left: 10%;
+    }
+
+    .mt {
+        height: 30px;
+        margin-top: 1px;
+        margin-right: 15px;
+    }
+
+    .icon-mt {
+        position: relative;
+        z-index: 10;
+    }
+
+    .textct {
+        font-size: 26px;
+        font-weight: bold;
+    }
+
+    #circle {
+        position: absolute;
+        padding: 20px;
+        background: #f1f2f2;
+        z-index: -1;
+        border-radius: 25px;
+        left: -4px;
+        top: -4px;
+    }
+
+    #tc {
+        display: flex;
+    }
+
+    #ltc {
+        display: flex;
+        margin-top: 10px;
+        margin-left: 13%;
+    }
+
+    .tct {
+        color: black;
+        margin-top: 3px;
+        margin-left: 3px;
+        font-weight: 700;
+        font-size: 16px;
+    }
+
+    #ttt {
+        font-weight: 300;
+    }
+
+    #page-wrapper {
+        margin-top: 20px;
+        width: 50%;
+        margin-left: 5%;
+        height: auto;
+        background: white;
+        border-radius: 20px;
+        margin-bottom: 50px;
+        padding: 20px;
+    }
+
+    .AA {
+        width: 80%;
+        margin-left: 8%;
+        display: flex;
+        justify-content: space-between;
+        border-bottom: 1px solid rgb(71, 113, 153);
+        padding: 5px;
+        margin-top: 10px;
+        margin-bottom: 10px;
+    }
+</style>
+<div id="wrapper-page">
+    <div id="hea">
+        <div class="icon-mt">
+            <div id="circle"></div>
+            <a href="/HomePageCustomer/Index"><img class="mt" src="https://smartbanking.bidv.com.vn/assets/media/svg/dark/left.svg" /></a>
+        </div>
+        <div class="textct">Lãi suất</div>
+    </div>
+    <div id="ltc">
+        <div>
+            <a href="/HomePageCustomer/Index">
+                <div id="tc">
+                    <div id="icon-home"><img id="img-aa" src="https://smartbanking.bidv.com.vn/assets/media/svg/grey/home.svg" /></div>
+                    <div class="tct" id="ttt">Trang chủ</div>
+                </div>
+            </a>
+        </div>
+        <div class="tct">/</div>
+        <div class="tct">Lãi suất</div>
+        <div id="page-wrapper">
+            <div class="AA">
+                <div>Kỳ hạn</div>
+                <div>VND</div>
+            </div>
+            @foreach (var i in CustomerDAO.Instance.GetListInterestRate())
+            {
+                <div class="AA">
+                    <div>@i.Term</div>
+                    <div>@i.InterestRate %</div>
+                </div>
+            }
+        </div>
+
+    </div>
+
+    </body>
+
+    <script>
+    $(document).ready(function () {
+        $(".mt").hover(function () {
+            $("#circle").css("background", "white");
+        }, function () {
+            $("#circle").css("background", "#f1f2f2");
+        });
+        $("#tc").hover(function () {
+            $("#img-aa").attr("src", "https://smartbanking.bidv.com.vn/assets/media/svg/accent/home.svg");
+            $("#ttt").css("color", "#03ab9c");
+        }, function () {
+            $("#ttt").css("color", "black");
+            $("#img-aa").attr("src", "https://smartbanking.bidv.com.vn/assets/media/svg/grey/home.svg");
+
+        });
+    });
+    </script>
+

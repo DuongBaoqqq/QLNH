@@ -1,0 +1,346 @@
+﻿
+@{
+    ViewBag.Title = "Mở tải khoản như ý";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style>
+    #wrapper-page {
+        width: 100%;
+        height: 550px;
+        background: #f1f2f2;
+        position: absolute;
+        right: 0px;
+        left: 0px;
+        top: 80px;
+        position: relative;
+    }
+
+    #hea {
+        margin-top: 20px;
+        display: flex;
+        margin-left: 10%;
+    }
+
+    .mt {
+        height: 30px;
+        margin-top: 1px;
+        margin-right: 15px;
+    }
+
+    .icon-mt {
+        position: relative;
+        z-index: 10;
+    }
+
+    .textct {
+        font-size: 26px;
+        font-weight: bold;
+    }
+
+    #circle {
+        position: absolute;
+        padding: 20px;
+        background: #f1f2f2;
+        z-index: -1;
+        border-radius: 25px;
+        left: -4px;
+        top: -4px;
+    }
+
+    #tc {
+        display: flex;
+    }
+
+    #ltc {
+        display: flex;
+        margin-top: 10px;
+        margin-left: 13%;
+    }
+
+    .tct {
+        color: black;
+        margin-top: 3px;
+        margin-left: 3px;
+        font-weight: 700;
+        font-size: 16px;
+    }
+
+    #ttt {
+        font-weight: 300;
+    }
+
+    #page-wrapper {
+        margin-top: 80px;
+        width: 40%;
+        margin-left: 10%;
+        height: auto;
+    }
+
+    #st {
+        display: flex;
+        justify-content: center;
+    }
+
+    #AA {
+        width: 1000px;
+        height: auto;
+        background: white;
+        margin-top: 10px;
+        border-radius: 20px;
+    }
+
+    #A1 {
+        height: 50px;
+        width: 100%;
+        background: white;
+        border-top-right-radius: 20px;
+        border-top-left-radius: 20px;
+        font-size: 22px;
+        font-weight: 600;
+        text-align: center;
+        margin-top: 20px;
+    }
+
+    #A2 {
+        height: 200px;
+        width: 100%;
+        background: #dff3f3;
+        border-bottom-right-radius: 20px;
+        border-bottom-left-radius: 20px;
+        position: relative;
+    }
+
+    #A3 {
+        position: absolute;
+        border-bottom: 2px solid rgb(61, 132, 199);
+        margin-top: 50px;
+        padding: 5px;
+        width: 50%;
+        margin-left: 100px;
+    }
+
+    #txtfake {
+        position: absolute;
+        font-size: 22px;
+        left: 6px;
+        top: 6px;
+        display: none;
+    }
+
+    #stk {
+        font-size: 20px;
+        width: 100%;
+        border: none;
+        outline: none;
+        background: #dff3f3;
+        ;
+    }
+
+    #btntt {
+        position: absolute;
+        margin-left: 65%;
+        margin-top: 50px;
+        width: 200px;
+    }
+
+    #ttb {
+        font-size: 20px;
+        width: 80%;
+        height: 40px;
+        border-radius: 10px;
+        cursor: pointer;
+        color: white;
+        background: linear-gradient(-90deg,rgb(0,108, 173),rgb(0,182,174));
+        border: none;
+    }
+
+        #ttb:hover {
+            background: linear-gradient(90deg,rgb(0,108, 173),rgb(0,182,174));
+        }
+
+    #btntt1 {
+        position: absolute;
+        margin-left: 65%;
+        margin-top: 140px;
+        width: 200px;
+        display: none;
+    }
+
+    #ttb1 {
+        font-size: 20px;
+        width: 80%;
+        height: 40px;
+        border-radius: 10px;
+        cursor: pointer;
+        color: white;
+        background: linear-gradient(-90deg,rgb(0,108, 173),rgb(0,182,174));
+        border: none;
+    }
+
+        #ttb1:hover {
+            background: linear-gradient(90deg,rgb(0,108, 173),rgb(0,182,174));
+        }
+
+    #error {
+        position: absolute;
+        top: 140px;
+        left: 100px;
+        color: red;
+        font-size: 17px;
+    }
+
+    #error1 {
+        position: absolute;
+        top: 95px;
+        left: 100px;
+        color: black;
+        font-size: 17px;
+    }
+
+    #error2 {
+        position: absolute;
+        top: 120px;
+        left: 100px;
+        color: black;
+        font-size: 17px;
+    }
+</style>
+<div id="wrapper-page">
+    <div id="hea">
+        <div class="icon-mt">
+            <div id="circle"></div>
+            <a href="/TrangChu/Index">
+                <img class="mt"
+                     src="https://smartbanking.bidv.com.vn/assets/media/svg/dark/left.svg" />
+            </a>
+        </div>
+        <div class="textct">Mở tài khoản như ý</div>
+    </div>
+    <div id="ltc">
+        <div>
+            <a href="/TrangChu/Index">
+                <div id="tc">
+                    <div id="icon-home">
+                        <img id="img-aa"
+                             src="https://smartbanking.bidv.com.vn/assets/media/svg/grey/home.svg" />
+                    </div>
+                    <div class="tct" id="ttt">Trang chủ</div>
+                </div>
+            </a>
+        </div>
+        <div class="tct">/</div>
+        <div class="tct">Mở tài khoản như ý</div>
+    </div>
+    <div id="st">
+        <div id="AA">
+            <div id="A1">Số tự chọn</div>
+            <div id="A2">
+                <div id="A3">
+                    <div id="txtfake">Nhập số tự chọn</div>
+                    <div id="A4">
+                        <input id="stk" placeholder="Nhập số tự chọn" maxlength="14" />
+                    </div>
+                </div>
+                <div id="btntt">
+                    <form id="form-submit">
+                        <button id="ttb">Kiểm tra</button>
+                    </form>
+                </div>
+                <div id="btntt1">
+                    <form id="form-submit1" action="#">
+                        <button id="ttb1">Xác nhận</button>
+                    </form>
+                </div>
+                <div id="error1">Quý khách nhập 14 kí tự số mong muốn</div>
+                <div id="error2">Phí dịch vụ là 5,000,000 VND</div>
+                <div id="error"></div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+        $(".mt").hover(function () {
+            $("#circle").css("background", "white");
+        }, function () {
+            $("#circle").css("background", "#f1f2f2");
+        });
+        $("#tc").hover(function () {
+            $("#img-aa").attr("src", "https://smartbanking.bidv.com.vn/assets/media/svg/accent/home.svg");
+            $("#ttt").css("color", "#03ab9c");
+        }, function () {
+            $("#ttt").css("color", "black");
+            $("#img-aa").attr("src", "https://smartbanking.bidv.com.vn/assets/media/svg/grey/home.svg");
+        });
+        $("#stk").click(function () {
+            $("#stk").attr("placeholder", "");
+            $("#txtfake").css("display", "block");
+            $("#txtfake").animate({ top: "-15px", "font-size": "14px" }, 250);
+            $("#txtfake").css("color", "rgb(26, 182, 196)");
+            $("#A3").css("border-bottom", "2px solid rgb(61, 132, 199)");
+        });
+        $("#form-submit").submit(e => {
+            if ($("#stk").val() == "") {
+                $("#txtfake").animate({ top: "6px", "font-size": "22px" }, 250);
+                $("#txtfake").css("color", "black");
+                $("#txtfake").css("display", "none");
+                $("#stk").attr("placeholder", "Nhập số tự chọn");
+                $("#error").text("Vui lòng nhập số tài khoản muốn tạo");
+                $("#A3").css("border-bottom", "2px solid red");
+                e.preventDefault();
+            }
+            else if ($("#stk").val().length < 14) {
+                $("#A3").css("border-bottom", "2px solid red");
+                $("#error").text("Tài khoản phải chứa 14 kí tự số");
+                e.preventDefault();
+            }
+            else {
+
+                $.ajax({
+                    url: '/CreateNewAccount/CheckSTK',
+                    type: "POST",
+                    data: { STK: $("#stk").val() },
+                    success: function (data) {
+                        if (data == 1) {
+                            $("#btntt1").css("display", "block");
+                            $("#error").text("Tài khoản hợp lệ");
+                            $("#error").css("color", "blue");
+                        }
+                        else {
+                            $("#error").text("Tài khoản đã tồn tại");
+                            $("#error").css("color", "red");
+                        }
+                    }
+                });
+                e.preventDefault();
+            }
+        });
+        $("#form-submit1").submit(e => {
+            $.ajax({
+                url: '/CreateNewAccount/SetSTK',
+                type: "POST",
+                data: { STK: $("#stk").val() },
+            });
+            window.location.href = "/SuccessfullyCreateNewAccount/Index";
+
+            e.preventDefault();
+        });
+        $("#stk").click(function () {
+            $("#error").text("");
+        });
+        var STK = "";
+        $('#stk').on('input', function (e) {
+            if ($("#stk").val().charCodeAt($("#stk").val().length - 1) < 48 || $("#stk").val().charCodeAt($("#stk").val().length - 1) > 57) {
+                $("#stk").val(STK);
+            }
+            if ($("#btntt1").css("display") == "block") {
+                $("#btntt1").css("display", "none");
+            }
+            STK = $("#stk").val();
+        });
+    });
+</script>
+
+</html>

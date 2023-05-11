@@ -1,0 +1,773 @@
+﻿@using BankManagement.Models.DAO;
+@{
+    ViewBag.Title = "Dịch vụ thẻ";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style>
+    #wrapper-page {
+        width: 100%;
+        height: 550px;
+        background: #f1f2f2;
+        position: absolute;
+        right: 0px;
+        left: 0px;
+        top: 80px;
+    }
+
+    #hea {
+        margin-top: 20px;
+        display: flex;
+        margin-left: 10%;
+    }
+
+    .mt {
+        height: 30px;
+        margin-top: 1px;
+        margin-right: 15px;
+    }
+
+    .icon-mt {
+        position: relative;
+        z-index: 10;
+    }
+
+    .textct {
+        font-size: 26px;
+        font-weight: bold;
+    }
+
+    #circle {
+        position: absolute;
+        padding: 20px;
+        background: #f1f2f2;
+        z-index: -1;
+        border-radius: 25px;
+        left: -4px;
+        top: -4px;
+    }
+
+    #tc {
+        display: flex;
+    }
+
+    #ltc {
+        display: flex;
+        margin-top: 10px;
+        margin-left: 13%;
+    }
+
+    .tct {
+        color: black;
+        margin-top: 3px;
+        margin-left: 3px;
+        font-weight: 700;
+        font-size: 16px;
+    }
+
+    #ttt {
+        font-weight: 300;
+    }
+
+    #A1 {
+        width: 60%;
+        height: auto;
+        display: flex;
+        flex-direction: column;
+        background: white;
+        margin-left: 15%;
+        border-radius: 20px;
+    }
+
+    #img-the {
+        border-radius: 20px;
+        margin: 20px;
+    }
+
+    #B1 {
+        width: 98%;
+        display: flex;
+        justify-content: space-between;
+    }
+
+    #B2 {
+        margin: 20px;
+        font-size: 18px;
+    }
+
+    .C1 {
+        display: flex;
+        justify-content: space-between;
+        margin: 15px 10px;
+    }
+
+    #AAA {
+        display: flex;
+    }
+
+    #B4 {
+        width: 500px;
+        height: 130px;
+        margin: 0px 50px;
+        border-radius: 20px;
+        background: white;
+    }
+
+    #B5 {
+        display: flex;
+        margin: 20px;
+        cursor: pointer;
+    }
+
+    #B6 {
+        display: flex;
+        margin: 20px;
+        cursor: pointer;
+    }
+
+    .texxt {
+        color: black;
+        margin: 4px 0px 10px 30px;
+        font-size: 18px;
+    }
+
+    #click-khoa {
+        position: absolute;
+        background: rgba(77, 74, 74, 0.4);
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        z-index: 1000;
+        display: none;
+    }
+
+    #mo {
+        position: absolute;
+        background: rgba(77, 74, 74, 0.4);
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        z-index: 1000;
+        display: none;
+    }
+
+    #form {
+        width: 30%;
+        height: 60%;
+        background: white;
+        margin-top: 10%;
+        margin-left: 35%;
+        border-radius: 10px;
+    }
+
+    #formmo {
+        width: 30%;
+        height: 44%;
+        background: white;
+        margin-top: 15%;
+        margin-left: 35%;
+        border-radius: 10px;
+    }
+
+    #form {
+        width: 30%;
+        height: auto;
+        padding: 20px;
+        background: white;
+        margin-top: 100px;
+        margin-left: 35%;
+        border-radius: 10px;
+    }
+
+    #H1 {
+        display: flex;
+        justify-content: space-between;
+        font-size: 18px;
+    }
+
+    #H2 {
+        display: flex;
+        justify-content: space-between;
+        font-size: 18px;
+    }
+
+    #H3 {
+        display: flex;
+        justify-content: space-between;
+        font-size: 18px;
+    }
+
+    #H1mo {
+        display: flex;
+        justify-content: space-between;
+        font-size: 18px;
+    }
+
+    #H2mo {
+        display: flex;
+        justify-content: space-between;
+        font-size: 18px;
+    }
+
+    #H3mo {
+        display: flex;
+        justify-content: space-between;
+        font-size: 18px;
+    }
+
+    .L {
+        margin: 30px 10px 5px 40px;
+    }
+
+    .R {
+        margin: 30px 40px 5px 10px;
+    }
+
+    #box {
+        margin-top: 2-px;
+        width: 80%;
+        border-bottom: 2px solid rgb(61, 132, 199);
+        display: flex;
+        justify-content: space-between;
+        cursor: pointer;
+        position: relative;
+    }
+
+    #hiden {
+        position: absolute;
+        width: 24%;
+        margin: 10px 40px;
+        height: auto;
+        background: #f1f2f2;
+        border-radius: 10px;
+        display: none;
+        font-size: 18px;
+    }
+
+    .q1 {
+        cursor: pointer;
+        padding: 15px;
+        border-radius: 10px;
+    }
+
+    #tttt {
+        font-size: 18px;
+    }
+
+    #E10 {
+        display: flex;
+        margin-top: 30px;
+        justify-content: center;
+    }
+
+    #E10mo {
+        display: flex;
+        margin-top: 30px;
+        justify-content: center;
+    }
+
+    #btn-submit {
+        width: 300px;
+        height: 50px;
+        border-radius: 10px;
+        border: none;
+        background: linear-gradient(-90deg, rgb(0, 108, 173), rgb(0, 182, 174));
+        color: white;
+        font-weight: 550;
+        font-size: 16px;
+        cursor: pointer;
+    }
+
+        #btn-submit:hover {
+            background: linear-gradient(90deg, rgb(0, 108, 173), rgb(0, 182, 174));
+        }
+
+    #btn-submitmo {
+        width: 300px;
+        height: 50px;
+        border-radius: 10px;
+        border: none;
+        background: linear-gradient(-90deg, rgb(0, 108, 173), rgb(0, 182, 174));
+        color: white;
+        font-weight: 550;
+        font-size: 16px;
+        cursor: pointer;
+    }
+
+        #btn-submitmo:hover {
+            background: linear-gradient(90deg, rgb(0, 108, 173), rgb(0, 182, 174));
+        }
+
+    .close {
+        cursor: pointer;
+    }
+
+    #click-khoa1 {
+        position: absolute;
+        background: rgba(77, 74, 74, 0.4);
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        z-index: 1000;
+        display: none;
+    }
+
+    .H7 {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 20px;
+        border-bottom: 2px solid rgb(61, 132, 199);
+        width: auto;
+        margin-left: 40px;
+        margin-right: 40px;
+    }
+
+    .H4 {
+        display: flex;
+    }
+
+    #H5 {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 20px;
+        border-bottom: 2px solid rgb(61, 132, 199);
+        width: auto;
+        margin-left: 40px;
+        margin-right: 40px;
+    }
+
+    #H6 {
+        display: flex;
+    }
+
+    #H8 {
+        font-size: 18px;
+    }
+
+    #E11 {
+        display: flex;
+        margin-top: 30px;
+        justify-content: center;
+    }
+
+    #btn-submit1 {
+        width: 300px;
+        height: 50px;
+        border-radius: 10px;
+        border: none;
+        background: linear-gradient(-90deg, rgb(0, 108, 173), rgb(0, 182, 174));
+        color: white;
+        font-weight: 500;
+        font-size: 16px;
+        cursor: pointer;
+    }
+
+        #btn-submit1:hover {
+            background: linear-gradient(90deg, rgb(0, 108, 173), rgb(0, 182, 174));
+        }
+
+    #error-1 {
+        color: red;
+        margin-top: 5px;
+        margin-left: 40px;
+        display: none;
+    }
+
+    #error1 {
+        color: red;
+        margin-top: 10px;
+        font-size: 16px;
+        margin-left: 40px;
+    }
+
+    .option {
+        margin-top: 20px;
+    }
+
+    #thongbao {
+        top: 90px;
+        right: 0px;
+        border-radius: 10px;
+        position: absolute;
+        height: auto;
+        width: auto;
+        font-weight: 600;
+        color: red;
+        display: none;
+        background-color: aquamarine;
+        padding: 10px;
+    }
+</style>
+<div id="wrapper-page">
+    <div id="hea">
+        <div class="icon-mt">
+            <div id="circle"></div>
+            <a href="/HomePageCustomer/Index">
+                <img class="mt"
+                     src="https://smartbanking.bidv.com.vn/assets/media/svg/dark/left.svg" />
+            </a>
+        </div>
+        <div class="textct">Dịch vụ thẻ</div>
+    </div>
+    <div id="ltc">
+        <div>
+            <a href="/HomePageCustomer/Index">
+                <div id="tc">
+                    <div id="icon-home">
+                        <img id="img-aa"
+                             src="https://smartbanking.bidv.com.vn/assets/media/svg/grey/home.svg" />
+                    </div>
+                    <div class="tct" id="ttt">Trang chủ</div>
+                </div>
+            </a>
+        </div>
+        <div class="tct">/</div>
+        <div class="tct">Dịch vụ thẻ</div>
+    </div>
+    <div id="AAA">
+        <div id="A1">
+            <div id="B1">
+                <div><img id="img-the" img src="~/Asset/Images/thebidv.png" width="300px"></div>
+                <div id="B2">
+                    <div style="margin-top:30px" id="STKchuyen">@CustomerDAO.Instance.GetMainCustomer().AccountNumber</div>
+                    <div style="margin-top:10px">@CustomerDAO.Instance.customer.NameCustomer</div>
+                    <div style="margin-top:10px" id="metmoiquadi">Ngày phát hành: @CustomerDAO.Instance.AccountIssueDate()</div>
+                    <div style="margin-top:10px" id="StateThe">Trạng thái thẻ : <b>@CustomerDAO.Instance.StateAccountNumber()</b></div>
+                </div>
+            </div>
+            <div>
+
+            </div>
+            <div id="B3">
+                <div class="C1" style="font-size: 18px;">Thông tin thẻ</div>
+                <div class="C1">
+                    <div style="font-size: 18px;">Loại thẻ</div>
+                    <div style="font-size: 18px; margin-right: 70px;">Thẻ ghi nợ nội địa</div>
+                </div>
+                <div class="C1">
+                    <div style="font-size: 18px;">Chi nhánh mở thẻ</div>
+                    <div style="font-size: 18px;margin-right: 70px;">@StaffDAO.Instance.GetNameAgencyByID(CustomerDAO.Instance.customer.IdAgency)</div>
+                </div>
+                <div class="C1" style="font-size: 18px; margin-top: 30px;">Tài khoản liên kết</div>
+                <div class="C1">
+                    <div style="font-size: 18px; " id="STKchyen1">@CustomerDAO.Instance.GetMainCustomer().AccountNumber</div>
+                    <div style="margin-right: 70px; font-size: 18px;">Tài khoản chính</div>
+                </div>
+            </div>
+        </div>
+        <div id="B4">
+            <div>
+                <div>
+                    <div id="B5">
+                        <div>
+                            <img id="hna" src="https://smartbanking.bidv.com.vn/assets/media/svg/dark/lock.svg">
+                        </div>
+                        <div class="texxt" id="khoa">Khóa/Mở thẻ</div>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <div>
+                    <div id="B6">
+                        <div>
+                            <img id="hna1" src="https://smartbanking.bidv.com.vn/assets/media/svg/dark/link.svg">
+                        </div>
+                        <div class="texxt" id="khoa1">Thay đổi tài khoản liên kết thẻ</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="click-khoa">
+    <div id="form">
+        <div id="H1">
+            <div class="L">Khoá/Mở thẻ</div>
+            <div class="R">
+                <div style="color: blue;" class="close">Đóng</div>
+            </div>
+        </div>
+        <div id=H2>
+            <div class="L">Trạng thái thẻ</div>
+            <div class="R">Đang hoạt động</div>
+        </div>
+        <div id="H3">
+            <div class="L">Yêu cầu</div>
+            <div class="R">Khóa thẻ</div>
+        </div>
+        <div class="L">Lí do khóa thẻ</div>
+        <div class="L" id="box">
+            <div id="tttt"></div>
+            <div>
+                <i class="fa-solid fa-arrow-down" style="margin-bottom: 10px;"></i>
+            </div>
+
+        </div>
+        <div id="hiden">
+            <div class="q1" id="e1">Mất thẻ</div>
+            <div class="q1" id="e2">Thẻ bị mất cắp</div>
+            <div class="q1" id="e3">Tạm ngưng sử dụng</div>
+        </div>
+        <div id="error-1">Chọn lí do khóa thẻ</div>
+        <div id="E10">
+            <div>
+                <form id="form-submit">
+                    <button id="btn-submit">Tiếp tục</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="mo">
+    <div id="formmo">
+        <div id="H1mo">
+            <div class="L">Khoá/Mở thẻ</div>
+            <div class="R">
+                <div style="color: blue;" class="close">Đóng</div>
+            </div>
+        </div>
+        <div id=H2mo>
+            <div class="L">Trạng thái thẻ</div>
+            <div class="R" style="color:red;">Thẻ khóa</div>
+        </div>
+        <div id="H3mo">
+            <div class="L">Yêu cầu</div>
+            <div class="R">Mở khóa thẻ</div>
+        </div>
+        <div id="E10mo">
+            <div>
+                <form id="form-submitmo">
+                    <button id="btn-submitmo">Tiếp tục</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="click-khoa1">
+    <div id="form">
+        <div id="H1">
+            <div class="L">Thay đổi tài khoản liên kết thẻ</div>
+            <div class="R">
+                <div style="color: blue;" class="close">Đóng</div>
+            </div>
+        </div>
+        <div id="H8">
+            @foreach (var i in CustomerDAO.Instance.GetListAccountNumberCustomer())
+            {
+                <div class="option" style="display:flex; justify-content:space-between">
+                    <div style="display:flex;margin-left:35px">
+                        <div>
+                            <input type="radio" class="radio" style="cursor:pointer;" name="category" />
+                        </div>
+                        <div>
+                            <label for="automobiles">@i.AccountNumber</label>
+                        </div>
+                    </div>
+                    <div style="margin-right:40px">
+                        @if (i.AccountNumber == CustomerDAO.Instance.GetMainCustomer().AccountNumber)
+                        {
+                            <label for="automobiles" style="align-content:end">Tài khoản chính</label>
+                        }
+                        else
+                        {
+                            <label for="automobiles" style="align-content:end">Tài khoản phụ</label>
+                        }
+                    </div>
+                </div>
+            }
+        </div>
+        <div id="error1"></div>
+        <div id="E11">
+            <form id="form-submit1">
+                <button id="btn-submit1">Tiếp tục</button>
+            </form>
+        </div>
+    </div>
+</div>
+<div id="thongbao">
+    Thay đổi liên kết thẻ thành công
+</div>
+<script>
+    $(document).ready(function () {
+        const optionsList = document.querySelectorAll(".option");
+        if ($("#StateThe").text() == "Trạng thái thẻ : Đã khóa") {
+            $("b").css("color", "red");
+        }
+        else {
+            $("b").css("color", "blue");
+        }
+        var STK = "0";
+        $(".mt").hover(function () {
+            $("#circle").css("background", "white");
+        }, function () {
+            $("#circle").css("background", "#f1f2f2");
+        });
+        $("#tc").hover(function () {
+            $("#img-aa").attr("src", "https://smartbanking.bidv.com.vn/assets/media/svg/accent/home.svg");
+            $("#ttt").css("color", "#03ab9c");
+        }, function () {
+            $("#ttt").css("color", "black");
+            $("#img-aa").attr("src", "https://smartbanking.bidv.com.vn/assets/media/svg/grey/home.svg");
+
+        });
+        $("#B5").hover(function () {
+            $("#hna").attr("src", "https://smartbanking.bidv.com.vn/assets/media/svg/accent/lock.svg");
+            $("#khoa").css("color", "#03ab9c");
+        }, function () {
+            $("#khoa").css("color", "black");
+            $("#hna").attr("src", "https://smartbanking.bidv.com.vn/assets/media/svg/dark/lock.svg");
+        });
+        $("#B6").hover(function () {
+            $("#hna1").attr("src", "https://smartbanking.bidv.com.vn/assets/media/svg/accent/link.svg");
+            $("#khoa1").css("color", "#03ab9c");
+        }, function () {
+            $("#khoa1").css("color", "black");
+            $("#hna1").attr("src", "https://smartbanking.bidv.com.vn/assets/media/svg/dark/link.svg");
+        });
+        $("#e1").hover(function () {
+            $("#e1").css("background", "#03ab9c");
+        }, function () {
+            $("#e1").css("background", "#f1f2f2");
+        });
+        $("#e2").hover(function () {
+            $("#e2").css("background", "#03ab9c");
+        }, function () {
+            $("#e2").css("background", "#f1f2f2");
+        });
+        $("#e3").hover(function () {
+            $("#e3").css("background", "#03ab9c");
+        }, function () {
+            $("#e3").css("background", "#f1f2f2");
+        });
+        $("#e1").click(function () {
+            $("#tttt").text("Mất thẻ");
+            $("#hiden").css("display", "none");
+            $("#error-1").css("display", "none");
+        });
+        $("#e2").click(function () {
+            $("#tttt").text("Thẻ bị mất cắp");
+            $("#hiden").css("display", "none");
+            $("#error-1").css("display", "none");
+        });
+        $("#e3").click(function () {
+            $("#tttt").text("Tạm ngưng sử dụng");
+            $("#hiden").css("display", "none");
+            $("#error-1").css("display", "none");
+        });
+        $("#box").click(function () {
+            $("#hiden").css("display", "block");
+        });
+        $("#B5").click(function () {
+            $.ajax({
+                url: '/Service/GetState',
+                type: "GET",
+                success: function (data) {
+                    if (data === "Đang hoạt động") {
+                        $("#click-khoa").css("display", "block");
+                    }
+                    else {
+                        $("#mo").css("display", "block");
+                    }
+                }
+            });
+
+        });
+        $("#B6").click(function () {    
+            $("#click-khoa1").css("display", "block");
+
+        });
+        optionsList.forEach(o => {
+            o.addEventListener("click", () => {
+                STK = o.querySelector("label").innerHTML;
+                console.log(STK);
+                $("#error1").text("");
+            });
+        });
+        $(".close").click(function () {
+            $("#click-khoa").css("display", "none");
+            $("#click-khoa1").css("display", "none");
+            $("#hiden").css("display", "none");
+            $("#tttt").text("");
+            $("#mo").css("display", "none");
+        });
+        $("#form-submit").submit(e => {
+
+
+            if ($("#tttt").text() == "") {
+                $("#error-1").css("display", "block");
+            }
+            else {
+                $("#error-1").css("display", "none");
+                $("#click-khoa").css("display", "none");
+                $.ajax({
+                    url: '/Service/SaveLichSuKhoaThe',
+                    type: "POST",
+                    data: {reason: $("#tttt").text() },
+                });
+            }
+            $("#tttt").text("");
+            $("b").text("Đã khóa");
+            $("b").css("color","red");
+            $("#thongbao").css("display", "block");
+            $("#thongbao").text("Khóa thẻ thành công");
+            $("#thongbao").delay(3000).slideUp(200, function () {
+                $("#thongbao").css("display", "none");
+            });
+            e.preventDefault();
+        });
+        $("#form-submit1").submit(e => {
+            if (STK != "0") {
+                $("#click-khoa1").css("display", "none");
+                $("#thongbao").css("display", "block");
+                $("#thongbao").text("Thay đổi liên kết thẻ thành công");
+                $("#thongbao").delay(3000).slideUp(200, function () {
+                    $("#thongbao").css("display", "none");
+                });
+
+
+                $.ajax({
+                    url: '/Service/ChangeMainSTK',
+                    type: "POST",
+                    data: { STK: STK },
+                    success: function (data) {
+                        $("#STKchuyen").text(STK);
+                        $("#STKchyen1").text(STK);
+                        $("#metmoiquadi").text("Ngày phát hành: " + data);
+                    }
+                });
+
+            }
+            else {
+                $("#error1").text("Vui lòng chọn 1 tài khoản làm tài khoản chính");
+            }
+            setTimeout(function () {
+                window.location.href = "/Service/Index";
+            }, 1000);
+
+            e.preventDefault();
+        });
+        $("#form-submitmo").submit(e => {
+            $("#mo").css("display", "none");
+            $.ajax({
+                url: '/Service/SaveLichSuMoThe',
+                type: "POST",
+                data: { STK: $("#STKchuyen").text() },
+            });
+            $("b").text("Đang hoạt động");
+            $("b").css("color", "blue");
+            $("#thongbao").css("display", "block");
+            $("#thongbao").text("Mở khóa thẻ thành công");
+
+            $("#thongbao").delay(3000).slideUp(200, function () {
+                $("#thongbao").css("display", "none");
+            });
+
+            e.preventDefault();
+        });
+
+    });
+</script>

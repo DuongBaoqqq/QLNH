@@ -1,0 +1,239 @@
+﻿
+@{
+    ViewBag.Title = "Xác nhận giao dịch";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@using BankManagement.Models.DAO
+<style>
+    body {
+        background: #f1f2f2;
+    }
+
+    #wrapper-page {
+        display: flex;
+        justify-content: center;
+        margin-top: -30px;
+    }
+
+    #hea {
+        margin-top: 90px;
+        display: flex;
+        margin-left: 10%;
+    }
+
+    .mt {
+        height: 30px;
+        margin-top: 1px;
+        margin-right: 15px;
+    }
+
+    .icon-mt {
+        position: relative;
+        z-index: 10;
+    }
+
+    #circle {
+        position: absolute;
+        padding: 20px;
+        background: #f1f2f2;
+        z-index: -1;
+        border-radius: 25px;
+        left: -4px;
+        top: -4px;
+    }
+
+    .textct {
+        font-size: 26px;
+        font-weight: bold;
+    }
+
+    #tc {
+        display: flex;
+    }
+
+    #ltc {
+        display: flex;
+        margin-top: 10px;
+        margin-left: 13%;
+    }
+
+    .tct {
+        color: black;
+        margin-top: 3px;
+        margin-left: 3px;
+        font-weight: 300;
+        font-size: 16px;
+    }
+
+    #cttttt {
+        cursor: pointer;
+    }
+
+    #thct {
+        color: black;
+        margin-top: 3px;
+        margin-left: 3px;
+        font-weight: 700;
+        font-size: 16px;
+    }
+
+    #AAA {
+        display: flex;
+        flex-direction: column;
+        width: 80%;
+        height: auto;
+        background: #a9e6e6;
+        justify-items: center;
+        align-items: center;
+        margin-top: 80px;
+        border-radius: 20px;
+        padding-bottom: 40px;
+    }
+
+    .D1 {
+        display: flex;
+        justify-content: space-between;
+        width: 60%;
+        height: auto;
+        margin: 10px 15px;
+    }
+
+    #F1 {
+        margin-top: 60px;
+    }
+
+    .text1 {
+        font-weight: 600;
+        font-size: 20px;
+    }
+
+    .text2 {
+        font-size: 18px;
+        font-weight: 500;
+    }
+
+    #btn {
+        margin-top: 30px;
+    }
+
+    #btn-submit {
+        font-weight: 600;
+        font-size: 20px;
+        height: 50px;
+        width: 300px;
+        border-radius: 20px;
+        border: none;
+        color: white;
+        background: linear-gradient(-90deg,rgb(0,108, 173),rgb(0,182,174));
+        transition: all 0.3s ease-in-out;
+    }
+
+        #btn-submit:hover {
+            background: linear-gradient(90deg,rgb(0,108, 173),rgb(0,182,174));
+        }
+
+    #e3 {
+        cursor: pointer;
+    }
+
+        #e3:hover {
+            color: #03ab9c;
+        }
+</style>
+<div id="hea">
+    <div class="icon-mt">
+        <div id="circle"></div>
+        <a href="/HomePageCustomer/Index"><img class="mt" src="https://smartbanking.bidv.com.vn/assets/media/svg/dark/left.svg" /></a>
+    </div>
+    <div class="textct">Chuyển tiền</div>
+</div>
+<div id="ltc">
+    <div>
+        <a href="/HomePageCustomer/Index">
+            <div id="tc">
+                <div id="icon-home"><img id="img-aa" src="https://smartbanking.bidv.com.vn/assets/media/svg/grey/home.svg" /></div>
+                <div class="tct" id="ttt">Trang chủ</div>
+            </div>
+        </a>
+    </div>
+    <div class="tct">/</div>
+    <div>
+        <a href="/TransfersCustomer/Index">
+            <div class="tct" id="cttttt">Chuyển tiền</div>
+        </a>
+    </div>
+    <div class="tct">/</div>
+    <div>
+        <a href="/MoneyTransfer/Index">
+            <div class="tct" id="e3">Thực hiện chuyển tiền</div>
+        </a>
+    </div>
+    <div class="tct">/</div>
+    <div id="thct">Xác nhận chuyển tiền</div>
+</div>
+<div id="wrapper-page">
+    <div id="AAA">
+        <div class="D1" id="F1">
+            <div class="text1">Tài khoản nguồn</div>
+            <div class="text2">@CustomerTransfersDAO.Instance.data.AccountNumberTransfers</div>
+        </div>
+        <div class="D1">
+            <div class="text1">Tài khoản hưởng thụ</div>
+            <div class="text2">@CustomerTransfersDAO.Instance.data.AccountNumberReceiving</div>
+        </div>
+        <div class="D1">
+            <div class="text1">Tên người hưởng thụ</div>
+            <div class="text2">@CustomerDAO.GetNameCustomerByAccountNumberCustomer(CustomerTransfersDAO.Instance.data.AccountNumberReceiving)</div>
+        </div>
+        <div class="D1">
+            <div class="text1">Số tiền</div>
+            <div class="text2">@CustomerDAO.ConvertMoney(CustomerTransfersDAO.Instance.data.AmountOfMoney)</div>
+        </div>
+        <div class="D1">
+            <div class="text1">Ngày giao dịch</div>
+            <div class="text2">@CustomerTransfersDAO.Instance.data.DateTrading</div>
+        </div>
+        <div class="D1">
+            <div class="text1">Nội dung</div>
+            <div class="text2">@CustomerTransfersDAO.Instance.data.Content</div>
+        </div>
+        <form id="form-submit" action="/SuccessfullyTransfer/Index">
+            <div id="btn">
+                <button id="btn-submit">Xác nhận</button>
+            </div>
+        </form>
+
+    </div>
+
+</div>
+<script>
+    $(document).ready(function () {
+        $(".mt").hover(function () {
+            $("#circle").css("background", "white");
+        }, function () {
+            $("#circle").css("background", "#f1f2f2");
+        });
+        $("#tc").hover(function () {
+            $("#img-aa").attr("src", "https://smartbanking.bidv.com.vn/assets/media/svg/accent/home.svg");
+            $("#ttt").css("color", "#03ab9c");
+        }, function () {
+            $("#ttt").css("color", "black");
+            $("#img-aa").attr("src", "https://smartbanking.bidv.com.vn/assets/media/svg/grey/home.svg");
+        });
+        $("#cttttt").hover(function () {
+            $("#cttttt").css("color", "#03ab9c");
+        }, function () {
+            $("#cttttt").css("color", "black");
+        });
+        $("#form-submit").submit(e => {
+            $.ajax({
+                url: 'Save',
+                type: "POST",
+            });
+            window.location.href = "/SuccessfullyTransfer/Index";
+            e.preventDefault();
+        });
+    });
+</script>
+
+

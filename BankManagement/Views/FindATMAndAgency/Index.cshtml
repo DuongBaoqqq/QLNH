@@ -1,0 +1,485 @@
+﻿@using BankManagement.Models.DAO;
+@{
+    ViewBag.Title = "Vị trí ATM/Chi nhánh";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style>
+    #wrapper-page {
+        width: 100%;
+        height: 550px;
+        background: #f1f2f2;
+        position: absolute;
+        right: 0px;
+        left: 0px;
+        top: 80px;
+    }
+
+    #hea {
+        margin-top: 20px;
+        display: flex;
+        margin-left: 10%;
+    }
+
+    .mt {
+        height: 30px;
+        margin-top: 1px;
+        margin-right: 15px;
+    }
+
+    .icon-mt {
+        position: relative;
+        z-index: 10;
+    }
+
+    .textct {
+        font-size: 26px;
+        font-weight: bold;
+    }
+
+    #circle {
+        position: absolute;
+        padding: 20px;
+        background: #f1f2f2;
+        z-index: -1;
+        border-radius: 25px;
+        left: -4px;
+        top: -4px;
+    }
+
+    #tc {
+        display: flex;
+    }
+
+    #ltc {
+        display: flex;
+        margin-top: 10px;
+        margin-left: 13%;
+    }
+
+    .tct {
+        color: black;
+        margin-top: 3px;
+        margin-left: 3px;
+        font-weight: 700;
+        font-size: 16px;
+    }
+
+    #ttt {
+        font-weight: 300;
+    }
+
+    #page-wrapper {
+        margin-top: 80px;
+        width: 40%;
+        margin-left: 10%;
+        height: auto;
+    }
+
+    .AA {
+        display: flex;
+        justify-content: space-between;
+        border-bottom: 1px solid rgb(71, 113, 153);
+        padding: 5px;
+        margin-top: 10px;
+    }
+
+    .container {
+        margin-top: 10px;
+        padding: 32px;
+    }
+
+    .select-box {
+        display: flex;
+        width: 300px;
+        flex-direction: column;
+    }
+
+        .select-box .options-container {
+            background: #2f3640;
+            color: #f5f6fa;
+            max-height: 0;
+            width: 300px;
+            opacity: 0;
+            transition: all 0.4s;
+            border-radius: 8px;
+            overflow: hidden;
+            position: absolute;
+            order: 1;
+        }
+
+    .selected {
+        background: #2f3640;
+        border-radius: 8px;
+        margin-bottom: 8px;
+        color: #f5f6fa;
+        position: relative;
+        order: 0;
+    }
+
+        .selected::after {
+            content: "";
+            background: url("https://www.freeiconspng.com/uploads/white-down-arrow-png-2.png");
+            background-size: contain;
+            background-repeat: no-repeat;
+            position: absolute;
+            height: 100%;
+            width: 32px;
+            right: 10px;
+            top: 5px;
+            transition: all 0.4s;
+        }
+
+    .select-box .options-container.active {
+        max-height: 240px;
+        opacity: 1;
+        overflow-y: scroll;
+    }
+
+        .select-box .options-container.active + .selected::after {
+            transform: rotateX(180deg);
+            top: -6px;
+        }
+
+    .select-box .options-container::-webkit-scrollbar {
+        width: 8px;
+        background: #0d141f;
+        border-radius: 0 8px 8px 0;
+    }
+
+    .select-box .options-container::-webkit-scrollbar-thumb {
+        background: #525861;
+        border-radius: 0 8px 8px 0;
+    }
+
+    .select-box .option,
+    .selected {
+        padding: 12px 24px;
+        cursor: pointer;
+    }
+
+        .select-box .option:hover {
+            background: #414b57;
+        }
+
+    .select-box label {
+        cursor: pointer;
+    }
+
+    .select-box .option .radio {
+        display: none;
+    }
+
+
+
+
+    .container1 {
+        margin-top: 10px;
+        padding: 32px;
+    }
+
+    .select-box1 {
+        display: flex;
+        width: 300px;
+        flex-direction: column;
+    }
+
+        .select-box1 .options-container1 {
+            background: #2f3640;
+            color: #f5f6fa;
+            max-height: 0;
+            width: 300px;
+            opacity: 0;
+            transition: all 0.4s;
+            border-radius: 8px;
+            overflow: hidden;
+            position: absolute;
+            order: 1;
+        }
+
+    .selected1 {
+        background: #2f3640;
+        border-radius: 8px;
+        margin-bottom: 8px;
+        color: #f5f6fa;
+        position: relative;
+        order: 0;
+    }
+
+        .selected1::after {
+            content: "";
+            background: url("https://www.freeiconspng.com/uploads/white-down-arrow-png-2.png");
+            background-size: contain;
+            background-repeat: no-repeat;
+            position: absolute;
+            height: 100%;
+            width: 32px;
+            right: 10px;
+            top: 5px;
+            transition: all 0.4s;
+        }
+
+    .select-box1 .options-container1.active1 {
+        max-height: 240px;
+        opacity: 1;
+        overflow-y: scroll;
+    }
+
+        .select-box1 .options-container1.active1 + .selected1::after {
+            transform: rotateX(180deg);
+            top: -6px;
+        }
+
+    .select-box1 .options-container1::-webkit-scrollbar {
+        width: 8px;
+        background: #0d141f;
+        border-radius: 0 8px 8px 0;
+    }
+
+    .select-box1 .options-container1::-webkit-scrollbar-thumb {
+        background: #525861;
+        border-radius: 0 8px 8px 0;
+    }
+
+    .select-box1 .option1,
+    .selected1 {
+        padding: 12px 24px;
+        cursor: pointer;
+    }
+
+        .select-box1 .option1:hover {
+            background: #414b57;
+        }
+
+    .select-box1 label {
+        cursor: pointer;
+    }
+
+    .select-box1 .option1 .radio1 {
+        display: none;
+    }
+
+    #combobox {
+        display: flex;
+    }
+
+    #SSS {
+        width: 740px;
+        height: 400px;
+        background: white;
+        margin-left: -80px;
+        margin-top: 30px;
+        border-radius: 10px;
+    }
+
+    #lisst {
+        width: 100%;
+        max-height: 260px;
+        opacity: 1;
+        overflow-y: scroll;
+    }
+
+    .S1 {
+        margin-left: 50px;
+        list-style: circle;
+    }
+
+    .S2 {
+        margin: 10px;
+    }
+</style>
+<div id="wrapper-page">
+    <div id="hea">
+        <div class="icon-mt">
+            <div id="circle"></div>
+            <a href="/HomePageCustomer/Index">
+                <img class="mt"
+                     src="https://smartbanking.bidv.com.vn/assets/media/svg/dark/left.svg" />
+            </a>
+        </div>
+        <div class="textct">Vị trí ATM/Chi nhánh</div>
+    </div>
+    <div id="ltc">
+        <div>
+            <a href="/HomePageCustomer/Index">
+                <div id="tc">
+                    <div id="icon-home">
+                        <img id="img-aa"
+                             src="https://smartbanking.bidv.com.vn/assets/media/svg/grey/home.svg" />
+                    </div>
+                    <div class="tct" id="ttt">Trang chủ</div>
+                </div>
+            </a>
+        </div>
+        <div class="tct">/</div>
+        <div class="tct">Vị trí ATM/Chi nhánh</div>
+        <div>
+            <div id="SSS">
+                <div id="combobox">
+                    <div class="container">
+                        <div class="select-box">
+                            <div class="options-container">
+                                <div class="option">
+                                    <input type="radio" class="radio" id="0" name="category" />
+                                    <label for="automobiles">none</label>
+                                </div>
+                                @foreach (var i in GetAddressDAO.Instance.ListProvince)
+                                {
+                                    <div class="option">
+                                        <input type="radio" class="radio" id=@i.ID name="category" />
+                                        <label for="automobiles">@i.NameProvince</label>
+                                    </div>
+                                }
+
+                            </div>
+
+                            <div class="selected">
+                                Tỉnh/Thành phố
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="container1">
+                        <div class="select-box1">
+                            <div class="options-container1">
+                            </div>
+
+                            <div class="selected1">
+                                Quận/Huyện
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="lisst">
+                    <ul class="S1">
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    $(document).ready(function () {
+        $(".mt").hover(function () {
+            $("#circle").css("background", "white");
+        }, function () {
+            $("#circle").css("background", "#f1f2f2");
+        });
+        $("#tc").hover(function () {
+            $("#img-aa").attr("src", "https://smartbanking.bidv.com.vn/assets/media/svg/accent/home.svg");
+            $("#ttt").css("color", "#03ab9c");
+        }, function () {
+            $("#ttt").css("color", "black");
+            $("#img-aa").attr("src", "https://smartbanking.bidv.com.vn/assets/media/svg/grey/home.svg");
+        });
+        $(".option").click(function () {
+
+            $.ajax({
+                url: '/Admin/CreateAccount/GetNameDistrictByProvince',
+                type: "POST",
+                data: { Province: $(".selected").text() },
+                success: function (data) {
+                    var html = "";
+                    html += "<div class='option1'>";
+                    html += "<input type='radio' class='radio1' id='0' name='category' />";
+                    html += " <label for='automobiles'>" + "none" + "</label>";
+                    html += "</div>";
+                    for (let i = 0; i < data.length; i++) {
+                        html += "<div class='option1'>";
+                        html += "<input type='radio' class='radio1' id=" + i + " name='category' />";
+                        html += " <label for='automobiles'>" + data[i] + "</label>";
+                        html += "</div>";
+                    }
+                    $(".options-container1").html(html);
+                    const optionsList1 = document.querySelectorAll(".option1");
+                    optionsList1.forEach(o => {
+                        o.addEventListener("click", () => {
+                            selected1.innerHTML = o.querySelector("label").innerHTML;
+                            optionsContainer1.classList.remove("active1");
+                            GetAddress($(".selected").text(), $(".selected1").text());
+                        });
+                    });
+                }
+            });
+        });
+    });
+    function GetAddress(data1, data2) {
+        if (data1 == "Tỉnh/Thành phố" && data2 == "Quận/Huyện");
+        else {
+            $.ajax({
+                url: '/TimKiemChiNhanhATM/GetAddress',
+                type: "GET",
+                success: function (res) {
+                    var html = "";
+                    for (let i = 0; i < res.length; i++) {
+                        if (data2 == "") {
+                            if (res[i].search(data1) != -1) {
+                                html += " <li class='S2'>" + res[i] + "</li>";
+                            }
+
+                        }
+                        else {
+                            if (res[i].search(data1) != -1 && res[i].search(data2) != -1) {
+                                html += " <li class='S2'>" + res[i] + "</li>";
+                            }
+                        }
+                    }
+                    $(".S1").html(html);
+                }
+            });
+        }
+    }
+
+</script>
+<script>
+    const selected = document.querySelector(".selected");
+    const optionsContainer = document.querySelector(".options-container");
+
+    const optionsList = document.querySelectorAll(".option");
+
+    selected.addEventListener("click", () => {
+        optionsContainer.classList.toggle("active");
+    });
+
+    optionsList.forEach(o => {
+        o.addEventListener("click", () => {
+            selected.innerHTML = o.querySelector("label").innerHTML;
+            optionsContainer.classList.remove("active");
+            $(".selected1").text("Quận/Huyện");
+            GetAddress($(".selected").text(), $(".selected1").text());
+        });
+    });
+    const selected1 = document.querySelector(".selected1");
+    const optionsContainer1 = document.querySelector(".options-container1");
+    selected1.addEventListener("click", () => {
+        if ($(".selected").text().trim() != "Tỉnh/Thành phố") {
+            optionsContainer1.classList.toggle("active1");
+        }
+    });
+    function GetAddress(data1, data2) {
+        if (data1 == "Tỉnh/Thành phố" && data2 == "Quận/Huyện");
+        else {
+            $.ajax({
+                url: '/FindATMAndAgency/GetAddress',
+                type: "GET",
+                success: function (res) {
+                    console.log(res);
+                    var html = "";
+                    for (let i = 0; i < res.length; i++) {
+                        if (data2 == "Quận/Huyện") {
+                            if (res[i].search(data1) != -1) {
+                                html += " <li class='S2'>" + "Vị trí chi nhánh: " + res[i] + "</li>";
+                            }
+                        }
+                        else {
+                            if (res[i].search(data1) != -1 && res[i].search(data2) != -1) {
+                                html += " <li class='S2'>" + "Vị trí chi nhánh: " + res[i] + "</li>";
+                            }
+                        }
+                    }
+                    $(".S1").html(html);
+                }
+            });
+        }
+    }
+</script>
+

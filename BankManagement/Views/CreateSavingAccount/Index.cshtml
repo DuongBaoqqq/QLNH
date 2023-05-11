@@ -1,0 +1,492 @@
+﻿
+@{
+    ViewBag.Title = "Gửi tiết kiệm";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@using BankManagement.Models.DAO
+<style>
+    #wrapper-page {
+        width: 100%;
+        height: 550px;
+        background: #f1f2f2;
+        position: absolute;
+        right: 0px;
+        left: 0px;
+        top: 80px;
+    }
+
+    #hea {
+        margin-top: 20px;
+        display: flex;
+        margin-left: 10%;
+    }
+
+    .mt {
+        height: 30px;
+        margin-top: 1px;
+        margin-right: 15px;
+    }
+
+    .icon-mt {
+        position: relative;
+        z-index: 10;
+    }
+
+    .textct {
+        font-size: 26px;
+        font-weight: bold;
+    }
+
+    #circle {
+        position: absolute;
+        padding: 20px;
+        background: #f1f2f2;
+        z-index: -1;
+        border-radius: 25px;
+        left: -4px;
+        top: -4px;
+    }
+
+    #tc {
+        display: flex;
+    }
+
+    #ltc {
+        display: flex;
+        margin-top: 10px;
+        margin-left: 13%;
+    }
+
+    .tct {
+        color: black;
+        margin-top: 3px;
+        margin-left: 3px;
+        font-weight: 700;
+        font-size: 16px;
+    }
+
+    #ttt, #ttt1 {
+        font-weight: 300;
+    }
+
+
+    #E0 {
+        display: flex;
+        justify-content: center;
+    }
+
+    #E1 {
+        width: 60%;
+        height: auto;
+        padding: 20px;
+        margin-top: 20px;
+        border-radius: 20px;
+        background: white;
+        position: relative;
+        display: flex;
+        flex-direction: column;
+    }
+
+    #E3 {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    #D1 {
+        margin-left: 40px;
+        margin-top: 70px;
+        display: flex;
+        border-bottom: 2px solid rgb(61, 132, 199);
+        width: 50%;
+        justify-content: space-between;
+    }
+
+    #ipmoney {
+        font-size: 20px;
+        width: 250%;
+        margin-bottom: 2px;
+        border: none;
+        outline: none;
+    }
+
+    #vnd {
+        font-size: 20px;
+        font-weight: 600;
+    }
+
+    #sotien {
+        position: absolute;
+        top: 70px;
+        font-size: 22px;
+        display: none;
+    }
+
+    .container {
+        margin-top: 20px;
+        padding: 32px;
+        position: absolute;
+        margin-left: 500px;
+    }
+
+    .select-box {
+        display: flex;
+        width: 250px;
+        flex-direction: column;
+    }
+
+        .select-box .options-container {
+            background: #2f3640;
+            color: #f5f6fa;
+            max-height: 0;
+            width: 250px;
+            opacity: 0;
+            transition: all 0.4s;
+            border-radius: 8px;
+            overflow: hidden;
+            position: absolute;
+            order: 1;
+        }
+
+    .selected {
+        background: #2f3640;
+        border-radius: 8px;
+        margin-bottom: 8px;
+        color: #f5f6fa;
+        position: relative;
+        order: 0;
+        font-size: 20px;
+    }
+
+        .selected::after {
+            content: "";
+            background: url("https://www.freeiconspng.com/uploads/white-down-arrow-png-2.png");
+            background-size: contain;
+            background-repeat: no-repeat;
+            position: absolute;
+            height: 100%;
+            width: 32px;
+            right: 10px;
+            top: 5px;
+            transition: all 0.4s;
+        }
+
+    .select-box .options-container.active {
+        max-height: 240px;
+        opacity: 1;
+        overflow-y: scroll;
+    }
+
+        .select-box .options-container.active + .selected::after {
+            transform: rotateX(180deg);
+            top: -6px;
+        }
+
+    .select-box .options-container::-webkit-scrollbar {
+        width: 8px;
+        background: #0d141f;
+        border-radius: 0 8px 8px 0;
+    }
+
+    .select-box .options-container::-webkit-scrollbar-thumb {
+        background: #525861;
+        border-radius: 0 8px 8px 0;
+    }
+
+    .select-box .option,
+    .selected {
+        padding: 12px 24px;
+        cursor: pointer;
+    }
+
+        .select-box .option:hover {
+            background: #414b57;
+        }
+
+    .select-box label {
+        cursor: pointer;
+    }
+
+    .select-box .option .radio {
+        display: none;
+    }
+
+    #submit {
+        display: flex;
+        justify-content: center;
+    }
+
+    #btnsm {
+        width: 300px;
+        height: 50px;
+        margin: 50px 0px 0px 0px;
+        border-radius: 10px;
+        border: none;
+        background: linear-gradient(-90deg,rgb(0,108, 173),rgb(0,182,174));
+        color: white;
+        font-weight: 600;
+        font-size: 16px;
+        cursor: pointer;
+    }
+
+        #btnsm:hover {
+            background: linear-gradient(90deg,rgb(0,108, 173),rgb(0,182,174));
+        }
+
+    #E5 {
+        margin-top: 50px;
+        margin-left: 40px;
+        font-size: 20px;
+        font-weight: 400;
+    }
+
+    r {
+        font-weight: 600;
+    }
+
+    #stringmoney {
+        align-self: flex-start;
+        margin-top: 10px;
+        margin-left: 40px;
+        color: blue;
+        font-size: 18px;
+        font-weight: 500;
+    }
+
+    #error {
+        align-self: flex-start;
+        margin-top: 5px;
+        margin-left: 40px;
+        color: red;
+        font-weight: 500;
+    }
+</style>
+<div id="wrapper-page">
+    <div id="hea">
+        <div class="icon-mt">
+            <div id="circle"></div>
+            <a href="/TrangChu/Index">
+                <img class="mt"
+                     src="https://smartbanking.bidv.com.vn/assets/media/svg/dark/left.svg" />
+            </a>
+        </div>
+        <div class="textct">Gửi tiết kiệm</div>
+    </div>
+    <div id="ltc">
+        <div>
+            <a href="/TrangChu/Index">
+                <div id="tc">
+                    <div id="icon-home">
+                        <img id="img-aa"
+                             src="https://smartbanking.bidv.com.vn/assets/media/svg/grey/home.svg" />
+                    </div>
+                    <div class="tct" id="ttt">Trang chủ</div>
+                </div>
+            </a>
+        </div>
+        <div class="tct">/</div>
+        <div>
+            <a href="/TaiKhoanTietKiem/Index">
+                <div id="a12">
+                    <div class="tct" id="ttt1">Tài khoản tiết kiệm</div>
+                </div>
+            </a>
+        </div>
+        <div class="tct">/</div>
+        <div class="tct">Gửi tiết kiệm</div>
+    </div>
+    <form id="form" action="#">
+        <div id="E0">
+            <div id="E1">
+                <div id="E3">
+                    <div id="D1">
+                        <div>
+                            <input id="ipmoney" placeholder="Số tiền" />
+                            <div id="sotien">Số tiền</div>
+                        </div>
+                        <div id="vnd">VND</div>
+                    </div>
+
+                    <div class="container">
+                        <div class="select-box">
+                            <div class="options-container">
+                                @foreach (var i in CustomerDAO.Instance.GetListInterestRate())
+                                {
+                                    <div class="option">
+                                        <input type="radio" class="radio" id=@i.ID name="category" />
+                                        <label for="automobiles">@i.Term</label>
+                                    </div>
+                                }
+
+
+                            </div>
+
+                            <div class="selected">
+                                Kì hạn
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="stringmoney"></div>
+                <div id="error"></div>
+                <div id="E5">
+                    <div>
+                        Lãi suất: <r id="ee">0%/năm</r>
+                    </div>
+                    <div style="margin-top:10px">
+                        Tiền lãi: <r id="eee">0 VND</r>
+                    </div>
+                </div>
+                <div id="submit">
+                    <button id="btnsm">Tiếp tục</button>
+                </div>
+            </div>
+        </div>
+    </form>
+
+</div>
+<script>
+    $(document).ready(function () {
+
+        $("#form").submit(e => {
+            if ($(".selected").text() == "Kì hạn") {
+                e.preventDefault();
+            }
+            if ($("#ipmoney").val() == "") {
+                e.preventDefault();
+            }
+            if ($("#D1").css("border-bottom") == "2px solid rgb(255, 0, 0)") {
+                e.preventDefault();
+            }
+            else {
+                $.ajax({
+                    url: '/CreateSavingAccount/CreateSavingAccount1',
+                    type: "POST",
+                    data: { SoTien: $("#ipmoney").val(), KiHan: $(".selected").text() },
+                });
+                window.location.href = "/ConfirmSavingAccount/Index";
+                e.preventDefault();
+            }
+
+        });
+		$(".mt").hover(function () {
+			$("#circle").css("background", "white");
+		}, function () {
+			$("#circle").css("background", "#f1f2f2");
+		});
+		$("#tc").hover(function () {
+			$("#img-aa").attr("src", "https://smartbanking.bidv.com.vn/assets/media/svg/accent/home.svg");
+			$("#ttt").css("color", "#03ab9c");
+		}, function () {
+			$("#ttt").css("color", "black");
+			$("#img-aa").attr("src", "https://smartbanking.bidv.com.vn/assets/media/svg/grey/home.svg");
+        });
+        $("#a12").hover(function () {
+            $("#ttt1").css("color", "#03ab9c");
+        }, function () {
+            $("#ttt1").css("color", "black");
+        });
+        $("#tc").hover(function () {
+            $("#img-aa").attr("src", "https://smartbanking.bidv.com.vn/assets/media/svg/accent/home.svg");
+            $("#ttt").css("color", "#03ab9c");
+        }, function () {
+            $("#ttt").css("color", "black");
+            $("#img-aa").attr("src", "https://smartbanking.bidv.com.vn/assets/media/svg/grey/home.svg");
+        });
+		$("#ipmoney").click(function () {
+			$("#ipmoney").attr("placeholder", "");
+			$("#sotien").css("display", "block");
+			$("#sotien").animate({ top: "70px", "font-size": "14px" }, 250);
+			$("#sotien").css("color", "rgb(26, 182, 196)");
+        });
+
+        var SoTien = "";
+        $('#ipmoney').on('input', function (e) {
+            if (($("#ipmoney").val().charCodeAt($("#ipmoney").val().length - 1) < 48 || $("#ipmoney").val().charCodeAt($("#ipmoney").val().length - 1) > 57)) {
+                $("#ipmoney").val(SoTien);
+            }
+            if ($("#ipmoney").val().length > 15) {
+                $("#ipmoney").val(SoTien);
+            }
+            SoTien = $("#ipmoney").val();
+            $.ajax({
+                url: '/CreateSavingAccount/StringMoney',
+                type: "POST",
+                data: { Money: $("#ipmoney").val() },
+                success: function (data) {
+                    $("#stringmoney").text(data);
+                }
+            });
+            $.ajax({
+                url: '/CreateSavingAccount/ConvertMoney',
+                type: "POST",
+                data: { SoTien: $("#ipmoney").val() },
+                success: function (data) {
+                    $("#ipmoney").val(data);
+                }
+            });
+            if ($(".selected").text().trim() != "Kì hạn") {
+                $.ajax({
+                    url: '/CreateSavingAccount/TienLai',
+                    type: "POST",
+                    data: { money: $("#ipmoney").val(), KiHan: $(".selected").text() },
+                    success: function (data) {
+                        $("#eee").text(data);
+                    }
+                });
+            }
+
+            var check;
+            $.ajax({
+                url: '/CreateSavingAccount/CheckMoney',
+                type: "POST",
+                data: { SoTien: $("#ipmoney").val() },
+                success: function (data) {
+                    if (data === false) {
+                        $("#error").text("Số dư trong tài khoản không đủ");
+                        $("#D1").css("border-bottom", "2px solid rgb(255,0,0)");
+                    }
+                    else {
+                        $("#error").text("");
+                        $("#D1").css("border-bottom", "2px solid rgb(61, 132, 199)");
+                    }
+                }
+            });
+
+        });
+
+	});
+</script>
+<script>
+	const selected = document.querySelector(".selected");
+	const optionsContainer = document.querySelector(".options-container");
+
+	const optionsList = document.querySelectorAll(".option");
+
+	selected.addEventListener("click", () => {
+		optionsContainer.classList.toggle("active");
+	});
+
+	optionsList.forEach(o => {
+		o.addEventListener("click", () => {
+            selected.innerHTML = o.querySelector("label").innerHTML;
+            $.ajax({
+                url: '/CreateSavingAccount/GetLaiSuatByKiHan',
+                type: "POST",
+                data: { Kihan: selected.innerHTML },
+                success: function (data) {
+                    $("#ee").text(data + "%/năm");
+                }
+            });
+            $.ajax({
+                url: '/CreateSavingAccount/TienLai',
+                type: "POST",
+                data: { money: $("#ipmoney").val(), KiHan: $(".selected").text() },
+                success: function (data) {
+                    $("#eee").text(data);
+                }
+            });
+			optionsContainer.classList.remove("active");
+        });
+	});
+</script>
+

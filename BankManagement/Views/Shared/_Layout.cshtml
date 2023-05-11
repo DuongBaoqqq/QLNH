@@ -1,0 +1,238 @@
+﻿
+@{
+    Layout = null;
+}
+@using BankManagement.Models.DAO
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://kit.fontawesome.com/b0bf115489.js" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+    <title>@ViewBag.Title</title>
+</head>
+
+
+<body>
+    <style>
+        @@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap");
+
+        html,
+        body {
+            font-family: "Roboto", sans-serif;
+        }
+
+        #wrapper {
+            position: absolute;
+            background: white;
+            height: 80px;
+            top: 0px;
+            left: 0px;
+            right: 0px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        #img {
+            margin-left: 33%;
+        }
+
+        #text-1 {
+            text-align: right;
+        }
+
+        #t-1 {
+            margin-top: 7px;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        #t-2 {
+            font-size: 18px;
+            font-weight: 500;
+            margin-top: 3px;
+        }
+
+        #btn1 {
+            display: flex;
+            justify-content: center;
+            margin: 10px;
+            border: none;
+            background: white;
+            cursor: pointer;
+            position: relative;
+            border-radius: 10px;
+            z-index: 101;
+        }
+
+            #btn1:hover {
+                background: rgb(241, 207, 131);
+            }
+
+        #text-1 {
+            margin-right: 0px;
+        }
+
+        #img_icon {
+            margin-left: 5px;
+            margin-right: 5px;
+            border-radius: 25px;
+            margin-top: 3px;
+        }
+
+        #menu-drop {
+            height: auto;
+            width: 150px;
+            margin-top: 0px;
+            margin-left: 16px;
+            background: white;
+            position: absolute;
+            display: none;
+            border-radius: 10px;
+            z-index: 101;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        ul {
+            list-style: none;
+            padding-inline-start: 10px;
+        }
+
+        #menu-1 {
+            display: flex;
+            padding: 5px;
+            background: white;
+            border-radius: 10px;
+        }
+
+        #menu-2 {
+            display: flex;
+            padding: 5px;
+            background: white;
+            border-radius: 10px;
+        }
+
+        #icon-1 {
+            margin-top: 3px;
+        }
+
+        #icon-2 {
+            margin-top: 3px;
+        }
+
+        #menu-2 {
+            margin-left: 5px;
+        }
+
+        .text-0 {
+            margin-left: 10px;
+            margin-top: 8px;
+            font-size: 18px;
+            font-weight: 500;
+            color: black;
+        }
+
+        #te1 {
+            margin-top: 4px;
+        }
+
+        #a {
+            background-color: rgb(179, 241, 221);
+        }
+
+        #lastlogin {
+            margin-left: 10px;
+            font-weight: 300;
+            font-size: 14px;
+        }
+    </style>
+    <div id="wrapper">
+        <div id="img">
+            <img src="~/Asset/Images/smart_bank_logo.jpg" />
+        </div>
+        <div id="btn-right">
+            <button id="btn1">
+                <div id="text-1">
+                    <div id="t-1"></div>
+                    <div id="t-2">@CustomerDAO.Instance.customer.NameCustomer</div>
+                </div>
+                <div>
+                    <img id="img_icon" width="50px"
+                         src="https://scontent.fdad1-1.fna.fbcdn.net/v/t1.30497-1/143086968_2856368904622192_1959732218791162458_n.png?_nc_cat=1&ccb=1-7&_nc_sid=7206a8&_nc_ohc=tMdrVb3iZvcAX8YIiVc&_nc_ht=scontent.fdad1-1.fna&oh=00_AT8YszCFUwHCAon3yYaVKDB_BXmfyE0Mov6LhETImk1weg&oe=62BE9A78" />
+                </div>
+            </button>
+            <div id="menu-drop">
+                <ul id="list">
+                    <li>
+                        <div>
+                            <a href="/ChangePassword/Index">
+                                <div id="menu-1">
+                                    <div><img id="icon-1" src="https://smartbanking.bidv.com.vn/assets/media/svg-ic-main/doi-mk.svg" width="29px" /></div>
+                                    <div class="text-0">Đổi mật khẩu</div>
+                                </div>
+                            </a>
+                        </div>
+                    </li>
+                    <li>
+                        <div>
+                            <a href="/CustomerLogin/Index">
+                                <div id="menu-2">
+                                    <div><img src="https://smartbanking.bidv.com.vn/assets/media/svg/danger/logout.svg" /></div>
+                                    <div class="text-0" id="te1">Đăng xuất</div>
+                                </div>
+                            </a>
+                        </div>
+                    </li>
+                    <li id="lastlogin">
+                        Lần đăng nhập gần nhất 231232
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    @RenderBody()
+</body>
+
+<script>
+    $(document).ready(function () {
+        set_time();
+        $("#menu-drop").css("width", $("#btn1").width());
+        $("#menu-1").hover(function () {
+            $(this).css("background", "rgb(241, 207, 131)");
+        }, function () {
+            $(this).css("background", "white");
+        });
+        $("#menu-2").hover(function () {
+            $(this).css("background", "rgb(241, 207, 131)");
+        }, function () {
+            $(this).css("background", "white");
+        });
+        $("#btn1").hover(function () {
+            $("#menu-drop").css("display", "block");
+        });
+        $("#btn-right").mouseleave(function () {
+            $("#menu-drop").css("display", "none");
+        });
+    });
+    function set_time() {
+        const d = new Date();
+        let hour = d.getHours();
+        if (hour < 12) {
+            $("#t-1").text("Chào buổi sáng!");
+        }
+        else if (hour < 18) {
+            $("#t-1").text("Chào buổi chiều!");
+        }
+        else {
+            $("#t-1").text("Chào buổi tối!");
+        }
+    }
+</script>
+
+</html>

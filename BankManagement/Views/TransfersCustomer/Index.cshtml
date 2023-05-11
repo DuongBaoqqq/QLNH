@@ -1,0 +1,352 @@
+﻿
+@using BankManagement.Models.DAO
+@{
+    ViewBag.Title = "Chuyển tiền";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style>
+    #wrapper-page {
+        width: 100%;
+        height: 550px;
+        background: #f1f2f2;
+        position: absolute;
+        right: 0px;
+        left: 0px;
+        top: 80px;
+    }
+
+    #hea {
+        margin-top: 20px;
+        display: flex;
+        margin-left: 10%;
+    }
+
+    .mt {
+        height: 30px;
+        margin-top: 1px;
+        margin-right: 15px;
+    }
+
+    .icon-mt {
+        position: relative;
+        z-index: 10;
+    }
+
+    .textct {
+        font-size: 26px;
+        font-weight: bold;
+    }
+
+    #circle {
+        position: absolute;
+        padding: 20px;
+        background: #f1f2f2;
+        z-index: -1;
+        border-radius: 25px;
+        left: -4px;
+        top: -4px;
+    }
+
+    #tc {
+        display: flex;
+    }
+
+    #ltc {
+        display: flex;
+        margin-top: 10px;
+        margin-left: 13%;
+    }
+
+    .tct {
+        color: black;
+        margin-top: 3px;
+        margin-left: 3px;
+        font-weight: 700;
+        font-size: 16px;
+    }
+
+    #ttt {
+        font-weight: 300;
+    }
+
+    #box-stk {
+        margin-top: 20px;
+        margin-left: 11%;
+        height: 200px;
+        width: 50%;
+        border-radius: 20px;
+        background: white;
+        display: flex;
+        flex-direction: column;
+    }
+
+    #box-input-stk {
+        height: 40px;
+        width: 60%;
+        margin: 30px 30px 30px 30px;
+        border-bottom: 2px solid rgb(61, 132, 199);
+        margin-top: 20px;
+        display: flex;
+        flex-direction: column;
+        position: relative;
+    }
+
+    #a2a {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    #stk {
+        font-size: 18px;
+        width: 160%;
+        border: none;
+        outline: none;
+        margin-top: 13px;
+    }
+
+    #ktra {
+        font-size: 18px;
+        margin-top: 13px;
+        cursor: pointer;
+        color: blue;
+    }
+
+    #txtfake {
+        position: absolute;
+        font-size: 21px;
+        left: 1px;
+        top: 13px;
+        display: none;
+    }
+
+    #btntt {
+        margin-top: 8%;
+        margin-left: 70%;
+    }
+
+    #ttb {
+        font-size: 20px;
+        width: 80%;
+        height: 40px;
+        border-radius: 10px;
+        cursor: pointer;
+        color: white;
+        background: linear-gradient(-90deg,rgb(0,108, 173),rgb(0,182,174));
+        border: none;
+    }
+
+        #ttb:hover {
+            background: linear-gradient(90deg,rgb(0,108, 173),rgb(0,182,174));
+        }
+
+    #lsgd {
+        height: auto;
+        width: 400px;
+        background: white;
+        margin: 20px;
+        border-radius: 20px;
+        padding-bottom: 20px;
+    }
+
+    #sss {
+        display: flex;
+    }
+
+    .AB {
+        margin-top: 10px;
+    }
+
+    .AC {
+        margin-top: 10px;
+        margin-left: 70px;
+    }
+
+    #tit {
+        margin-top: 10px;
+        font-weight: 600;
+        font-size: 20px;
+        text-align: center;
+    }
+</style>
+<div id="wrapper-page">
+    <div id="hea">
+        <div class="icon-mt">
+            <div id="circle"></div>
+            <a href="/HomePageCustomer/Index"><img class="mt" src="https://smartbanking.bidv.com.vn/assets/media/svg/dark/left.svg" /></a>
+        </div>
+        <div class="textct">Chuyển tiền</div>
+    </div>
+    <div id="ltc">
+        <div>
+            <a href="/HomePageCustomer/Index">
+                <div id="tc">
+                    <div id="icon-home"><img id="img-aa" src="https://smartbanking.bidv.com.vn/assets/media/svg/grey/home.svg" /></div>
+                    <div class="tct" id="ttt">Trang chủ</div>
+                </div>
+            </a>
+        </div>
+        <div class="tct">/</div>
+        <div class="tct">Chuyển tiền</div>
+    </div>
+    <div id="sss">
+        <div id="box-stk">
+            <form id="form-submit" action="#">
+                <div id="box-input-stk">
+                    <div id="a2a">
+                        <div id="txtfake">Số tài khoản</div>
+                        <div>
+                            <input id="stk" placeholder="Số tài khoản" maxlength="14" />
+                        </div>
+                        <div id="ktra">Kiểm tra</div>
+                    </div>
+                    <div class="tennguoinhan"></div>
+                </div>
+                <div id="btntt">
+                    <button id="ttb">Tiếp tục</button>
+                </div>
+            </form>
+        </div>
+        @*<div id="lsgd">
+                <div id="tit">Lịch sử chuyển tiền gần đây</div>
+
+                @if (Customer.Instance.GetCount() < 4)
+                {
+                    for (int i = 0; i < Customer.Instance.GetCount(); i++)
+                    {
+                        <div style="display:flex">
+                            <div class="AC"><img src="https://smartbanking.bidv.com.vn/assets/media/bank/sm/bidv.svg" /></div>
+                            <div class="AB">
+                                <div style="font-weight:600;">@GetDataFromDatabaseDAO.Instance.GetNameCustomerBySTK(Customer.Instance.GetListCT()[i].STKNhan)</div>
+                                <div>@Customer.Instance.GetListCT()[i].STKNhan</div>
+                                <div>@Function.Instance.ConvertLongToMoney(Convert.ToInt64(Customer.Instance.GetListCT()[i].SoTien))</div>
+                            </div>
+                        </div>
+                    }
+                }
+                else
+                {
+                    for (int i = 0; i < 4; i++)
+                    {
+                        <div style="display:flex">
+                            <div class="AC"><img src="https://smartbanking.bidv.com.vn/assets/media/bank/sm/bidv.svg" /></div>
+                            <div class="AB">
+                                <div style="font-weight:600;">@GetDataFromDatabaseDAO.Instance.GetNameCustomerBySTK(Customer.Instance.GetListCT()[i].STKNhan)</div>
+                                <div>@Customer.Instance.GetListCT()[i].STKNhan</div>
+                                <div>@Function.Instance.ConvertLongToMoney(Convert.ToInt64(Customer.Instance.GetListCT()[i].SoTien))</div>
+                            </div>
+                        </div>
+                    }
+                }
+
+
+
+            </div>*@
+    </div>
+</div>
+<script>
+    $(document).ready(function () {
+        $(".mt").hover(function () {
+            $("#circle").css("background", "white");
+        }, function () {
+            $("#circle").css("background", "#f1f2f2");
+        });
+        $("#tc").hover(function () {
+            $("#img-aa").attr("src", "https://smartbanking.bidv.com.vn/assets/media/svg/accent/home.svg");
+            $("#ttt").css("color", "#03ab9c");
+        }, function () {
+            $("#ttt").css("color", "black");
+            $("#img-aa").attr("src", "https://smartbanking.bidv.com.vn/assets/media/svg/grey/home.svg");
+
+        });
+        $("#stk").click(function () {
+            $("#stk").attr("placeholder", "");
+            $("#txtfake").css("display", "block");
+            $("#txtfake").animate({ top: "-10px", "font-size": "14px" }, 250);
+            $("#txtfake").css("color", "rgb(26, 182, 196)");
+        });
+        $("#ktra").click(function () {
+            if ($("#stk").val() == @CustomerDAO.Instance.GetMainCustomer().AccountNumber) {
+                $(".tennguoinhan").text("Không thể thực hiện giao dịch Chuyển tiền cùng chủ tài khoản");
+                $(".tennguoinhan").css("font-size", "14px");
+                $(".tennguoinhan").css("margin-top", "12px");
+                $(".tennguoinhan").css("color", "red");
+                $(".tennguoinhan").css("font-weight", "500");
+            }
+            else {
+                $.ajax({
+                    url: '/Admin/Transfers/GetNameCustomer',
+                    type: "POST",
+                    data: { AccountNumberCustomer: $("#stk").val() },
+                    success: function (data) {
+                        if (data != "Error") {
+                            $(".tennguoinhan").text(data);
+                            $(".tennguoinhan").css("color", "blue");
+                            $(".tennguoinhan").css("margin-top", "20px");
+                            $(".tennguoinhan").css("font-size", "18px");
+                            $(".tennguoinhan").css("font-weight", "500");
+                        }
+                        else {
+                            $(".tennguoinhan").text("Số tài khoản thụ hưởng không tồn tại. Quý khách vui lòng kiểm tra lại");
+                            $(".tennguoinhan").css("font-size", "14px");
+                            $(".tennguoinhan").css("margin-top", "12px");
+                            $(".tennguoinhan").css("color", "red");
+                            $(".tennguoinhan").css("font-weight", "500");
+                        }
+                    }
+                });
+            }
+
+        });
+        var STK = "";
+        $('#stk').on('input', function (e) {
+            if ($("#stk").val().charCodeAt($("#stk").val().length - 1) < 48 || $("#stk").val().charCodeAt($("#stk").val().length - 1) > 57) {
+                $("#stk").val(STK);
+            }
+            STK = $("#stk").val();
+        });
+        $("#form-submit").submit(e => {
+            if ($("#stk").val() == "") {
+                $(".tennguoinhan").text("Vui lòng nhập số tài khoản cần chuyển tiền");
+                $(".tennguoinhan").css("font-size", "14px");
+                $(".tennguoinhan").css("margin-top", "12px");
+                $(".tennguoinhan").css("color", "red");
+                $(".tennguoinhan").css("font-weight", "500");
+                e.preventDefault();
+            }
+            else if ($("#stk").val() ==  @CustomerDAO.Instance.GetMainCustomer().AccountNumber) {
+                $(".tennguoinhan").text("Không thể thực hiện giao dịch Chuyển tiền cùng chủ tài khoản");
+                $(".tennguoinhan").css("font-size", "14px");
+                $(".tennguoinhan").css("margin-top", "12px");
+                $(".tennguoinhan").css("color", "red");
+                $(".tennguoinhan").css("font-weight", "500");
+                e.preventDefault();
+            }
+            else {
+                $.ajax({
+                    url: '/Admin/Transfers/GetNameCustomer',
+                    type: "POST",
+                    data: { AccountNumberCustomer: $("#stk").val() },
+                    success: function (data) {
+                        if (data == "Error") {
+                            $(".tennguoinhan").text("Số tài khoản thụ hưởng không tồn tại. Quý khách vui lòng kiểm tra lại");
+                            $(".tennguoinhan").css("font-size", "14px");
+                            $(".tennguoinhan").css("margin-top", "12px");
+                            $(".tennguoinhan").css("color", "red");
+                            $(".tennguoinhan").css("font-weight", "500");
+                        }
+                        else {
+                            $.ajax({
+                                url: '/TransfersCustomer/SetCustomerTransfers',
+                                type: "POST",
+                                data: { STK: $("#stk").val()},
+                            });
+                            window.location.href = "/MoneyTransfer/Index";
+                        }
+                    }
+                });
+                e.preventDefault();
+            }
+        });
+    });
+</script>
+
